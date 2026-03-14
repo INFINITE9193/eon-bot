@@ -7,254 +7,189 @@
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0a0f;
-    --paper: #f5f0e8;
-    --red: #e8162a;
-    --gold: #f5c400;
-    --blue: #1a3a8f;
-    --panel: #fffdf5;
-    --shadow: 5px 5px 0px var(--ink);
+    --ink: #0a0a0f; --paper: #f5f0e8; --red: #e8162a;
+    --gold: #f5c400; --blue: #1a3a8f; --panel: #fffdf5;
+    --green: #1a8f4a; --shadow: 5px 5px 0px var(--ink);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--paper);
-    font-family: 'Noto Sans JP', sans-serif;
-    color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: var(--paper); font-family: 'Noto Sans JP', sans-serif;
+    color: var(--ink); min-height: 100vh; overflow-x: hidden;
     background-image:
       repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.07) 39px, rgba(0,0,0,0.07) 40px),
       repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.04) 39px, rgba(0,0,0,0.04) 40px);
   }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--ink);
-    border-bottom: 5px solid var(--red);
-    position: relative; overflow: hidden;
-  }
-  .speed-lines {
-    position: absolute; inset: 0;
-    background: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 4deg, rgba(255,255,255,0.03) 4deg, rgba(255,255,255,0.03) 5deg);
-  }
-  .header-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 20px; position: relative; z-index: 2;
-  }
-  .logo {
-    font-family: 'Bangers', cursive; font-size: 2.4rem;
-    color: var(--gold); letter-spacing: 4px;
-    text-shadow: 3px 3px 0 var(--red), 6px 6px 0 rgba(0,0,0,0.5);
-  }
-  .player-badge {
-    background: var(--gold); border: 3px solid var(--ink);
-    padding: 6px 14px; font-weight: 900; font-size: 0.75rem;
-    box-shadow: 3px 3px 0 var(--red); z-index: 2; text-align: right;
-    cursor: pointer;
-  }
-  .player-badge .ip-label { font-size: 0.6rem; opacity: 0.7; }
-  .player-badge .ip-val { font-size: 0.85rem; }
-
-  /* ── LOGIN SCREEN ── */
+  /* LOGIN */
   #loginScreen {
-    position: fixed; inset: 0; z-index: 100;
-    background: var(--ink);
+    position: fixed; inset: 0; z-index: 100; background: var(--ink);
     display: flex; align-items: center; justify-content: center;
     background-image: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 4deg, rgba(255,255,255,0.02) 4deg, rgba(255,255,255,0.02) 5deg);
   }
   .login-box {
-    border: 4px solid var(--gold);
-    background: var(--ink);
-    padding: 32px 24px;
-    width: 90%; max-width: 360px;
-    box-shadow: 8px 8px 0 var(--red);
-    animation: popIn 0.3s ease;
+    border: 4px solid var(--gold); background: var(--ink);
+    padding: 32px 24px; width: 90%; max-width: 360px;
+    box-shadow: 8px 8px 0 var(--red); animation: popIn 0.3s ease;
   }
-  @keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    70% { transform: scale(1.05); }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  .login-logo {
-    font-family: 'Bangers', cursive; font-size: 3rem;
-    color: var(--gold); letter-spacing: 6px;
-    text-shadow: 4px 4px 0 var(--red);
-    text-align: center; margin-bottom: 6px;
-  }
-  .login-sub {
-    text-align: center; color: rgba(245,196,0,0.5);
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 24px;
-  }
-  .login-tabs {
-    display: flex; margin-bottom: 20px;
-    border: 3px solid var(--gold);
-  }
-  .login-tab {
-    flex: 1; padding: 8px; text-align: center;
-    font-family: 'Bangers', cursive; font-size: 1rem;
-    letter-spacing: 2px; cursor: pointer;
-    color: rgba(245,196,0,0.5); background: transparent;
-    border: none; transition: all 0.15s;
-  }
-  .login-tab.active { background: var(--gold); color: var(--ink); }
-  .login-input {
-    display: block; width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 2px solid rgba(245,196,0,0.4);
-    color: white; padding: 10px 14px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.9rem; font-weight: 700;
-    outline: none; margin-bottom: 12px;
-    transition: border-color 0.2s;
-  }
-  .login-input:focus { border-color: var(--gold); }
-  .login-input::placeholder { color: rgba(255,255,255,0.3); }
-  .login-btn {
-    display: block; width: 100%;
-    background: var(--gold); border: 3px solid var(--gold);
-    color: var(--ink); font-family: 'Bangers', cursive;
-    font-size: 1.2rem; letter-spacing: 3px;
-    padding: 10px; cursor: pointer;
-    box-shadow: 4px 4px 0 var(--red);
-    transition: transform 0.1s, box-shadow 0.1s;
-    margin-top: 4px;
-  }
-  .login-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--red); }
-  .login-msg {
-    margin-top: 12px; font-size: 0.78rem; font-weight: 700;
-    text-align: center; min-height: 20px;
-  }
-  .login-msg.err { color: var(--red); }
-  .login-msg.ok  { color: #4aff8c; }
+  @keyframes popIn { 0%{transform:scale(0.8);opacity:0} 70%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
+  .login-logo { font-family:'Bangers',cursive; font-size:3rem; color:var(--gold); letter-spacing:6px; text-shadow:4px 4px 0 var(--red); text-align:center; margin-bottom:6px; }
+  .login-sub { text-align:center; color:rgba(245,196,0,0.5); font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; }
+  .login-tabs { display:flex; margin-bottom:20px; border:3px solid var(--gold); }
+  .login-tab { flex:1; padding:8px; text-align:center; font-family:'Bangers',cursive; font-size:1rem; letter-spacing:2px; cursor:pointer; color:rgba(245,196,0,0.5); background:transparent; border:none; }
+  .login-tab.active { background:var(--gold); color:var(--ink); }
+  .login-input { display:block; width:100%; background:rgba(255,255,255,0.05); border:2px solid rgba(245,196,0,0.4); color:white; padding:10px 14px; font-family:'Noto Sans JP',sans-serif; font-size:0.9rem; font-weight:700; outline:none; margin-bottom:12px; }
+  .login-input:focus { border-color:var(--gold); }
+  .login-input::placeholder { color:rgba(255,255,255,0.3); }
+  .login-btn { display:block; width:100%; background:var(--gold); border:3px solid var(--gold); color:var(--ink); font-family:'Bangers',cursive; font-size:1.2rem; letter-spacing:3px; padding:10px; cursor:pointer; box-shadow:4px 4px 0 var(--red); margin-top:4px; }
+  .login-btn:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--red); }
+  .login-msg { margin-top:12px; font-size:0.78rem; font-weight:700; text-align:center; min-height:20px; }
+  .login-msg.err { color:var(--red); }
+  .login-msg.ok  { color:#4aff8c; }
 
-  /* ── GAME ── */
-  #gameScreen { display: none; }
+  /* HEADER */
+  #gameScreen { display:none; }
+  header { background:var(--ink); border-bottom:5px solid var(--red); position:relative; overflow:hidden; }
+  .speed-lines { position:absolute; inset:0; background:repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 4deg, rgba(255,255,255,0.03) 4deg, rgba(255,255,255,0.03) 5deg); }
+  .header-inner { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; position:relative; z-index:2; gap:8px; flex-wrap:wrap; }
+  .logo { font-family:'Bangers',cursive; font-size:2rem; color:var(--gold); letter-spacing:4px; text-shadow:3px 3px 0 var(--red); }
+  .player-info { display:flex; align-items:center; gap:8px; }
+  .player-badge { background:var(--gold); border:3px solid var(--ink); padding:5px 12px; font-weight:900; font-size:0.72rem; box-shadow:3px 3px 0 var(--red); cursor:pointer; text-align:right; }
+  .player-badge .lbl { font-size:0.55rem; opacity:0.7; }
+  .xp-badge { background:var(--blue); border:3px solid var(--ink); padding:5px 10px; color:white; font-size:0.7rem; font-weight:900; box-shadow:3px 3px 0 var(--ink); }
+  .xp-badge .lbl { font-size:0.55rem; opacity:0.7; display:block; }
 
-  .balance-panel {
-    margin: 16px; border: 4px solid var(--ink);
-    background: var(--panel); box-shadow: var(--shadow);
-    position: relative; overflow: hidden;
-  }
-  .balance-panel::before {
-    content: ''; position: absolute; top: 0; right: 0;
-    width: 0; height: 0; border-style: solid;
-    border-width: 0 50px 50px 0;
-    border-color: transparent var(--red) transparent transparent;
-  }
-  .balance-header {
-    background: var(--ink); color: var(--gold);
-    font-family: 'Bangers', cursive; font-size: 1rem;
-    letter-spacing: 2px; padding: 6px 14px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .balance-body { display: flex; padding: 14px; gap: 12px; }
-  .stat-box { flex: 1; border: 3px solid var(--ink); padding: 10px; text-align: center; background: white; }
-  .stat-box.gold-bg { background: var(--gold); }
-  .stat-box.blue-bg { background: var(--blue); color: white; }
-  .stat-label { font-size: 0.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
-  .stat-val { font-family: 'Bangers', cursive; font-size: 1.8rem; letter-spacing: 1px; line-height: 1.1; }
+  /* TABS */
+  .game-tabs { display:flex; background:var(--ink); border-bottom:4px solid var(--red); overflow-x:auto; }
+  .game-tab { flex:1; min-width:60px; padding:10px 6px; text-align:center; font-family:'Bangers',cursive; font-size:0.85rem; letter-spacing:1px; cursor:pointer; color:rgba(255,255,255,0.4); background:transparent; border:none; border-bottom:3px solid transparent; white-space:nowrap; }
+  .game-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
 
-  .panels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px 16px; }
-  .panel { border: 4px solid var(--ink); background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
-  .panel.full { grid-column: 1 / -1; }
-  .panel-title {
-    background: var(--ink); color: white;
-    font-family: 'Bangers', cursive; font-size: 0.95rem;
-    letter-spacing: 2px; padding: 5px 12px;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .panel-body { padding: 10px; }
+  /* CONTENT */
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
 
-  .cmd-btn {
-    display: block; width: 100%; margin-bottom: 8px;
-    background: white; border: 3px solid var(--ink);
-    padding: 9px 12px; cursor: pointer; text-align: left;
-    font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
-    box-shadow: 3px 3px 0 var(--ink);
-    transition: transform 0.1s, box-shadow 0.1s;
-    position: relative; overflow: hidden; color: var(--ink);
-  }
-  .cmd-btn:last-child { margin-bottom: 0; }
-  .cmd-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
-  .cmd-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-  .cmd-btn.red::before   { background: var(--red); }
-  .cmd-btn.gold::before  { background: var(--gold); }
-  .cmd-btn.blue::before  { background: var(--blue); }
-  .cmd-btn .btn-name { font-size: 0.85rem; display: block; }
-  .cmd-btn .btn-desc { font-size: 0.65rem; opacity: 0.6; display: block; margin-top: 1px; }
-  .cmd-btn.red:hover   { background: #fff0f0; }
-  .cmd-btn.gold:hover  { background: #fffbe0; }
-  .cmd-btn.blue:hover  { background: #f0f3ff; }
+  /* BALANCE */
+  .balance-panel { margin:16px; border:4px solid var(--ink); background:var(--panel); box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .balance-panel::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 50px 50px 0; border-color:transparent var(--red) transparent transparent; }
+  .balance-header { background:var(--ink); color:var(--gold); font-family:'Bangers',cursive; font-size:1rem; letter-spacing:2px; padding:6px 14px; display:flex; align-items:center; gap:8px; }
+  .balance-body { display:flex; padding:14px; gap:12px; }
+  .stat-box { flex:1; border:3px solid var(--ink); padding:10px; text-align:center; background:white; }
+  .stat-box.gold-bg { background:var(--gold); }
+  .stat-box.blue-bg { background:var(--blue); color:white; }
+  .stat-label { font-size:0.6rem; font-weight:900; text-transform:uppercase; letter-spacing:1px; opacity:0.7; }
+  .stat-val { font-family:'Bangers',cursive; font-size:1.8rem; letter-spacing:1px; line-height:1.1; }
 
-  .input-row { display: flex; gap: 6px; margin-bottom: 8px; }
-  .mini-input {
-    flex: 1; border: 3px solid var(--ink); padding: 7px 10px;
-    font-family: 'Noto Sans JP', sans-serif; font-size: 0.8rem; font-weight: 700;
-    outline: none; background: white; min-width: 0;
-  }
-  .mini-input:focus { background: #fffbe0; }
-  .mini-btn {
-    background: var(--ink); color: var(--gold);
-    border: 3px solid var(--ink); padding: 7px 12px;
-    font-family: 'Bangers', cursive; font-size: 0.9rem;
-    letter-spacing: 1px; cursor: pointer; white-space: nowrap;
-  }
-  .mini-btn:active { opacity: 0.7; }
+  /* XP BAR */
+  .xp-bar-wrap { margin:0 16px 16px; border:3px solid var(--ink); background:white; height:14px; position:relative; box-shadow:3px 3px 0 var(--ink); }
+  .xp-bar-fill { height:100%; background:linear-gradient(90deg, var(--blue), var(--gold)); transition:width 0.5s ease; }
+  .xp-bar-label { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:900; color:var(--ink); mix-blend-mode:multiply; }
 
-  .result-area { margin: 0 16px 16px; min-height: 10px; }
-  .speech-bubble {
-    border: 4px solid var(--ink); background: var(--panel);
-    padding: 14px 16px; position: relative;
-    box-shadow: var(--shadow); display: none;
-    animation: popIn 0.2s ease;
-  }
-  .speech-bubble.show { display: block; }
-  .speech-bubble::before {
-    content: '▲'; position: absolute; top: -18px; left: 24px;
-    font-size: 1rem; color: var(--ink);
-  }
-  .bubble-title {
-    font-family: 'Bangers', cursive; font-size: 1.1rem;
-    letter-spacing: 2px; margin-bottom: 8px;
-  }
-  .bubble-title.success { color: #1a8f4a; }
-  .bubble-title.error   { color: var(--red); }
-  .bubble-title.info    { color: var(--blue); }
-  .bubble-content { font-size: 0.82rem; line-height: 1.6; }
-  .data-row {
-    display: flex; justify-content: space-between;
-    border-bottom: 1px dashed rgba(0,0,0,0.15);
-    padding: 3px 0; font-size: 0.8rem;
-  }
-  .data-row:last-child { border-bottom: none; }
-  .data-key { opacity: 0.6; font-size: 0.72rem; text-transform: uppercase; }
-  .data-val { font-weight: 900; }
-  .data-val.pos { color: #1a8f4a; }
-  .data-val.neg { color: var(--red); }
-  .data-val.gold-c { color: #b8900a; }
+  /* PANELS GRID */
+  .panels-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 16px; }
+  .panel { border:4px solid var(--ink); background:var(--panel); box-shadow:var(--shadow); overflow:hidden; }
+  .panel.full { grid-column:1/-1; }
+  .panel-title { background:var(--ink); color:white; font-family:'Bangers',cursive; font-size:0.95rem; letter-spacing:2px; padding:5px 12px; display:flex; align-items:center; gap:6px; }
+  .panel-body { padding:10px; }
 
-  .lb-row { display: flex; align-items: center; gap: 8px; border-bottom: 2px solid var(--ink); padding: 6px 0; }
-  .lb-row:last-child { border-bottom: none; }
-  .lb-rank { font-family: 'Bangers', cursive; font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
-  .lb-rank.first  { color: var(--gold); }
-  .lb-rank.second { color: #aaa; }
-  .lb-rank.third  { color: #b87333; }
-  .lb-nick { flex: 1; font-size: 0.78rem; font-weight: 700; }
-  .lb-coins { font-weight: 900; font-size: 0.85rem; color: #b8900a; }
+  .cmd-btn { display:block; width:100%; margin-bottom:8px; background:white; border:3px solid var(--ink); padding:9px 12px; cursor:pointer; text-align:left; font-family:'Noto Sans JP',sans-serif; font-size:0.78rem; font-weight:700; box-shadow:3px 3px 0 var(--ink); transition:transform 0.1s,box-shadow 0.1s; position:relative; overflow:hidden; color:var(--ink); }
+  .cmd-btn:last-child { margin-bottom:0; }
+  .cmd-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+  .cmd-btn::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; }
+  .cmd-btn.red::before { background:var(--red); }
+  .cmd-btn.gold::before { background:var(--gold); }
+  .cmd-btn.blue::before { background:var(--blue); }
+  .cmd-btn .btn-name { font-size:0.85rem; display:block; }
+  .cmd-btn .btn-desc { font-size:0.65rem; opacity:0.6; display:block; margin-top:1px; }
+  .cmd-btn.red:hover { background:#fff0f0; }
+  .cmd-btn.gold:hover { background:#fffbe0; }
+  .cmd-btn.blue:hover { background:#f0f3ff; }
 
-  .cooldown-tag {
-    display: inline-block; background: var(--ink); color: var(--gold);
-    font-size: 0.6rem; font-weight: 900; padding: 1px 5px; margin-left: 4px; vertical-align: middle;
+  .input-row { display:flex; gap:6px; margin-bottom:8px; }
+  .mini-input { flex:1; border:3px solid var(--ink); padding:7px 10px; font-family:'Noto Sans JP',sans-serif; font-size:0.8rem; font-weight:700; outline:none; background:white; min-width:0; }
+  .mini-input:focus { background:#fffbe0; }
+  .mini-btn { background:var(--ink); color:var(--gold); border:3px solid var(--ink); padding:7px 12px; font-family:'Bangers',cursive; font-size:0.9rem; letter-spacing:1px; cursor:pointer; white-space:nowrap; }
+  .mini-btn:active { opacity:0.7; }
+
+  /* RESULT */
+  .result-area { margin:0 16px 16px; min-height:10px; }
+  .speech-bubble { border:4px solid var(--ink); background:var(--panel); padding:14px 16px; position:relative; box-shadow:var(--shadow); display:none; animation:popIn 0.2s ease; }
+  .speech-bubble.show { display:block; }
+  .speech-bubble::before { content:'▲'; position:absolute; top:-18px; left:24px; font-size:1rem; color:var(--ink); }
+  .bubble-title { font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:2px; margin-bottom:8px; }
+  .bubble-title.success { color:var(--green); }
+  .bubble-title.error { color:var(--red); }
+  .bubble-title.info { color:var(--blue); }
+  .bubble-content { font-size:0.82rem; line-height:1.6; }
+  .data-row { display:flex; justify-content:space-between; border-bottom:1px dashed rgba(0,0,0,0.15); padding:3px 0; font-size:0.8rem; }
+  .data-row:last-child { border-bottom:none; }
+  .data-key { opacity:0.6; font-size:0.72rem; text-transform:uppercase; }
+  .data-val { font-weight:900; }
+  .data-val.pos { color:var(--green); }
+  .data-val.neg { color:var(--red); }
+  .data-val.gold-c { color:#b8900a; }
+  .data-val.blue-c { color:var(--blue); }
+
+  /* QUESTS */
+  .quest-item { border:3px solid var(--ink); padding:10px; margin-bottom:8px; background:white; box-shadow:3px 3px 0 var(--ink); position:relative; }
+  .quest-item.done { background:#f0fff5; border-color:var(--green); }
+  .quest-item:last-child { margin-bottom:0; }
+  .quest-name { font-size:0.82rem; font-weight:900; }
+  .quest-progress { font-size:0.68rem; opacity:0.6; margin-top:2px; }
+  .quest-reward { position:absolute; right:10px; top:50%; transform:translateY(-50%); font-family:'Bangers',cursive; font-size:0.9rem; color:#b8900a; }
+  .quest-bar { height:6px; background:#eee; border:2px solid var(--ink); margin-top:6px; }
+  .quest-bar-fill { height:100%; background:var(--gold); transition:width 0.4s; }
+  .quest-item.done .quest-bar-fill { background:var(--green); }
+
+  /* INVENTORY */
+  .inv-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .inv-item { border:3px solid var(--ink); padding:10px; background:white; box-shadow:3px 3px 0 var(--ink); text-align:center; }
+  .inv-icon { font-size:1.6rem; }
+  .inv-name { font-family:'Bangers',cursive; font-size:0.95rem; letter-spacing:1px; margin-top:4px; }
+  .inv-desc { font-size:0.62rem; opacity:0.6; margin-top:2px; }
+  .inv-empty { text-align:center; padding:20px; opacity:0.4; font-size:0.85rem; grid-column:1/-1; }
+
+  /* LEADERBOARD */
+  .lb-row { display:flex; align-items:center; gap:8px; border-bottom:2px solid var(--ink); padding:7px 0; }
+  .lb-row:last-child { border-bottom:none; }
+  .lb-rank { font-family:'Bangers',cursive; font-size:1.1rem; width:24px; text-align:center; flex-shrink:0; }
+  .lb-rank.first { color:var(--gold); }
+  .lb-rank.second { color:#aaa; }
+  .lb-rank.third { color:#b87333; }
+  .lb-info { flex:1; }
+  .lb-nick { font-size:0.82rem; font-weight:900; }
+  .lb-title { font-size:0.62rem; opacity:0.6; }
+  .lb-coins { font-weight:900; font-size:0.85rem; color:#b8900a; }
+
+  /* CHAT */
+  .chat-messages { height:280px; overflow-y:auto; border:3px solid var(--ink); background:white; padding:10px; margin-bottom:10px; display:flex; flex-direction:column; gap:6px; }
+  .chat-msg { font-size:0.8rem; line-height:1.4; }
+  .chat-nick { font-weight:900; color:var(--blue); margin-right:4px; }
+  .chat-nick.me { color:var(--red); }
+  .chat-time { font-size:0.6rem; opacity:0.4; margin-left:4px; }
+  .chat-input-row { display:flex; gap:6px; }
+  .chat-input { flex:1; border:3px solid var(--ink); padding:8px 12px; font-family:'Noto Sans JP',sans-serif; font-size:0.85rem; font-weight:700; outline:none; background:white; }
+  .chat-input:focus { background:#fffbe0; }
+  .chat-send { background:var(--ink); color:var(--gold); border:3px solid var(--ink); padding:8px 16px; font-family:'Bangers',cursive; font-size:1rem; letter-spacing:1px; cursor:pointer; }
+
+  .cooldown-tag { display:inline-block; background:var(--ink); color:var(--gold); font-size:0.6rem; font-weight:900; padding:1px 5px; margin-left:4px; vertical-align:middle; }
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--paper); }
+  ::-webkit-scrollbar-thumb { background:var(--ink); }
+
+  /* LEVEL UP POPUP */
+  .levelup-popup {
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background:var(--gold); border:4px solid var(--ink); padding:12px 24px;
+    font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:3px;
+    box-shadow:6px 6px 0 var(--ink); z-index:999;
+    animation:slideDown 0.4s ease, fadeOut 0.4s ease 2s forwards;
   }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--paper); }
-  ::-webkit-scrollbar-thumb { background: var(--ink); }
+  @keyframes slideDown { from{opacity:0;transform:translateX(-50%) translateY(-20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+  @keyframes fadeOut { to{opacity:0;transform:translateX(-50%) translateY(-20px)} }
 </style>
 </head>
 <body>
 
-<!-- ── LOGIN SCREEN ── -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">☄️ EON</div>
@@ -270,146 +205,193 @@
   </div>
 </div>
 
-<!-- ── GAME SCREEN ── -->
+<!-- GAME -->
 <div id="gameScreen">
   <header>
     <div class="speed-lines"></div>
     <div class="header-inner">
       <div class="logo">☄️ EON</div>
-      <div class="player-badge" onclick="doLogout()">
-        <div class="ip-label">JOGADOR · toque p/ sair</div>
-        <div class="ip-val" id="playerNickDisplay">—</div>
+      <div class="player-info">
+        <div class="xp-badge">
+          <span class="lbl">NÍVEL · XP</span>
+          <span id="headerLevel">1</span> · <span id="headerXp">0</span>
+        </div>
+        <div class="player-badge" onclick="doLogout()">
+          <div class="lbl">JOGADOR · sair</div>
+          <div id="playerNickDisplay">—</div>
+        </div>
       </div>
     </div>
   </header>
 
-  <div class="balance-panel">
-    <div class="balance-header">
-      💰 STATUS DO JOGADOR
-      <span style="margin-left:auto;font-size:0.75rem;cursor:pointer;text-decoration:underline" onclick="fetchBalance()">↻ ATUALIZAR</span>
-    </div>
-    <div class="balance-body">
-      <div class="stat-box gold-bg">
-        <div class="stat-label">Carteira</div>
-        <div class="stat-val" id="statBalance">—</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Banco</div>
-        <div class="stat-val" id="statBank">—</div>
-      </div>
-      <div class="stat-box blue-bg">
-        <div class="stat-label">Total</div>
-        <div class="stat-val" id="statTotal">—</div>
-      </div>
-    </div>
+  <!-- TABS -->
+  <div class="game-tabs">
+    <button class="game-tab active" onclick="showTab('play')">⚔️ JOGAR</button>
+    <button class="game-tab" onclick="showTab('quests')">📜 QUESTS</button>
+    <button class="game-tab" onclick="showTab('inventory')">🎒 MOCHILA</button>
+    <button class="game-tab" onclick="showTab('shop')">🛒 LOJA</button>
+    <button class="game-tab" onclick="showTab('leaderboard')">🏆 RANKING</button>
+    <button class="game-tab" onclick="showTab('chat')">💬 CHAT</button>
   </div>
 
-  <div class="result-area">
-    <div class="speech-bubble" id="resultBubble">
-      <div class="bubble-title" id="bubbleTitle">RESULTADO</div>
-      <div class="bubble-content" id="bubbleContent"></div>
+  <!-- PLAY TAB -->
+  <div id="tab-play" class="tab-content active">
+    <div class="balance-panel">
+      <div class="balance-header">
+        💰 STATUS
+        <span id="playerTitle" style="font-size:0.75rem;opacity:0.8;margin-left:4px"></span>
+        <span style="margin-left:auto;font-size:0.75rem;cursor:pointer;text-decoration:underline" onclick="fetchBalance()">↻</span>
+      </div>
+      <div class="balance-body">
+        <div class="stat-box gold-bg"><div class="stat-label">Carteira</div><div class="stat-val" id="statBalance">—</div></div>
+        <div class="stat-box"><div class="stat-label">Banco</div><div class="stat-val" id="statBank">—</div></div>
+        <div class="stat-box blue-bg"><div class="stat-label">Total</div><div class="stat-val" id="statTotal">—</div></div>
+      </div>
     </div>
-  </div>
+    <div class="xp-bar-wrap">
+      <div class="xp-bar-fill" id="xpBar" style="width:0%"></div>
+      <div class="xp-bar-label" id="xpBarLabel">0 XP</div>
+    </div>
 
-  <div class="panels-grid">
-
-    <div class="panel">
-      <div class="panel-title"><span>⚡</span> ACOES</div>
-      <div class="panel-body">
-        <button class="cmd-btn gold" onclick="cmd('work')">
-          <span class="btn-name">💼 Trabalhar</span>
-          <span class="btn-desc">+50~150 coins <span class="cooldown-tag">30min</span></span>
-        </button>
-        <button class="cmd-btn gold" onclick="cmd('daily')">
-          <span class="btn-name">🎁 Daily</span>
-          <span class="btn-desc">+200~500 coins <span class="cooldown-tag">24h</span></span>
-        </button>
-        <button class="cmd-btn blue" onclick="cmd('mine')">
-          <span class="btn-name">⛏️ Minerar</span>
-          <span class="btn-desc">+30~120 coins <span class="cooldown-tag">1h</span></span>
-        </button>
-        <button class="cmd-btn red" onclick="cmd('crime')">
-          <span class="btn-name">💀 Crime</span>
-          <span class="btn-desc">Alto risco, alto lucro <span class="cooldown-tag">1h</span></span>
-        </button>
+    <div class="result-area">
+      <div class="speech-bubble" id="resultBubble">
+        <div class="bubble-title" id="bubbleTitle">RESULTADO</div>
+        <div class="bubble-content" id="bubbleContent"></div>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-title"><span>🏦</span> BANCO</div>
-      <div class="panel-body">
-        <div class="input-row">
-          <input class="mini-input" id="depositVal" type="number" placeholder="Valor...">
-          <button class="mini-btn" onclick="cmdAmount('deposit', 'depositVal')">DEP</button>
+    <div class="panels-grid">
+      <div class="panel">
+        <div class="panel-title"><span>⚡</span> ACOES</div>
+        <div class="panel-body">
+          <button class="cmd-btn gold" onclick="cmd('work')">
+            <span class="btn-name">💼 Trabalhar</span>
+            <span class="btn-desc">+50~150 coins · +10xp <span class="cooldown-tag">30min</span></span>
+          </button>
+          <button class="cmd-btn gold" onclick="cmd('daily')">
+            <span class="btn-name">🎁 Daily</span>
+            <span class="btn-desc">+200~500 coins · +30xp <span class="cooldown-tag">24h</span></span>
+          </button>
+          <button class="cmd-btn blue" onclick="cmd('mine')">
+            <span class="btn-name">⛏️ Minerar</span>
+            <span class="btn-desc">+30~120 coins · +15xp <span class="cooldown-tag">1h</span></span>
+          </button>
+          <button class="cmd-btn red" onclick="cmd('crime')">
+            <span class="btn-name">💀 Crime</span>
+            <span class="btn-desc">Alto risco · +20xp <span class="cooldown-tag">1h</span></span>
+          </button>
         </div>
-        <div class="input-row">
-          <input class="mini-input" id="withdrawVal" type="number" placeholder="Valor...">
-          <button class="mini-btn" onclick="cmdAmount('withdraw', 'withdrawVal')">SAC</button>
-        </div>
-        <div style="border-top:2px dashed var(--ink);padding-top:8px;margin-top:4px;">
-          <div style="font-size:0.68rem;font-weight:900;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Transferir para nick:</div>
-          <input class="mini-input" id="transferNick" type="text" placeholder="nick do jogador..." style="margin-bottom:6px;width:100%;display:block;">
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span>🏦</span> BANCO</div>
+        <div class="panel-body">
           <div class="input-row">
-            <input class="mini-input" id="transferVal" type="number" placeholder="Valor...">
-            <button class="mini-btn" onclick="cmdTransfer()">→</button>
+            <input class="mini-input" id="depositVal" type="number" placeholder="Valor...">
+            <button class="mini-btn" onclick="cmdAmount('deposit','depositVal')">DEP</button>
+          </div>
+          <div class="input-row">
+            <input class="mini-input" id="withdrawVal" type="number" placeholder="Valor...">
+            <button class="mini-btn" onclick="cmdAmount('withdraw','withdrawVal')">SAC</button>
+          </div>
+          <div style="border-top:2px dashed var(--ink);padding-top:8px;margin-top:4px;">
+            <div style="font-size:0.68rem;font-weight:900;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Transferir:</div>
+            <input class="mini-input" id="transferNick" type="text" placeholder="nick..." style="margin-bottom:6px;width:100%;display:block;">
+            <div class="input-row">
+              <input class="mini-input" id="transferVal" type="number" placeholder="Valor...">
+              <button class="mini-btn" onclick="cmdTransfer()">→</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="panel">
-      <div class="panel-title"><span>🎰</span> SLOTS</div>
-      <div class="panel-body">
-        <div id="reelsDisplay" style="font-size:1.6rem;text-align:center;padding:10px 0;border:3px solid var(--ink);background:white;margin-bottom:8px;letter-spacing:6px;">
-          ? ? ?
+      <div class="panel">
+        <div class="panel-title"><span>🎰</span> SLOTS</div>
+        <div class="panel-body">
+          <div id="reelsDisplay" style="font-size:1.6rem;text-align:center;padding:10px 0;border:3px solid var(--ink);background:white;margin-bottom:8px;letter-spacing:6px;">? ? ?</div>
+          <div class="input-row">
+            <input class="mini-input" id="slotsVal" type="number" placeholder="Aposta...">
+            <button class="mini-btn" onclick="cmdSlots()">GIRAR</button>
+          </div>
+          <div style="font-size:0.65rem;opacity:0.6;margin-top:4px;">3 iguais=5x | 💎=10x | 2 iguais=2x</div>
         </div>
-        <div class="input-row">
-          <input class="mini-input" id="slotsVal" type="number" placeholder="Aposta...">
-          <button class="mini-btn" onclick="cmdSlots()">GIRAR</button>
-        </div>
-        <div style="font-size:0.65rem;opacity:0.6;margin-top:4px;">3 iguais=5x | diamante=10x | 2 iguais=2x</div>
       </div>
-    </div>
 
-    <div class="panel">
-      <div class="panel-title"><span>🗡️</span> PVP</div>
-      <div class="panel-body">
-        <div style="font-size:0.68rem;font-weight:900;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Nick da Vitima:</div>
-        <input class="mini-input" id="robNick" type="text" placeholder="nick do jogador..." style="margin-bottom:8px;width:100%;display:block;">
-        <button class="cmd-btn red" onclick="cmdRob()">
-          <span class="btn-name">🔪 Roubar</span>
-          <span class="btn-desc">40% chance de sucesso</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="panel full">
-      <div class="panel-title"><span>🛒</span> LOJA</div>
-      <div class="panel-body">
-        <div id="shopGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <div style="text-align:center;padding:16px;opacity:0.4;font-size:0.8rem;grid-column:1/-1">Carregando...</div>
+      <div class="panel">
+        <div class="panel-title"><span>🗡️</span> PVP</div>
+        <div class="panel-body">
+          <div style="font-size:0.68rem;font-weight:900;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Nick da Vitima:</div>
+          <input class="mini-input" id="robNick" type="text" placeholder="nick..." style="margin-bottom:8px;width:100%;display:block;">
+          <button class="cmd-btn red" onclick="cmdRob()">
+            <span class="btn-name">🔪 Roubar</span>
+            <span class="btn-desc">40% chance · +30xp se ganhar</span>
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="panel full">
-      <div class="panel-title">
-        <span>🏆</span> LEADERBOARD
-        <span style="margin-left:auto;font-size:0.75rem;cursor:pointer;font-family:'Noto Sans JP'" onclick="fetchLeaderboard()">↻</span>
+  <!-- QUESTS TAB -->
+  <div id="tab-quests" class="tab-content">
+    <div style="padding:16px;">
+      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">
+        📜 MISSOES DIARIAS
+        <span style="font-size:0.7rem;font-family:'Noto Sans JP';font-weight:700;opacity:0.5;margin-left:8px;">Resetam à meia-noite</span>
       </div>
-      <div class="panel-body" id="lbBody">
-        <div style="text-align:center;padding:16px;opacity:0.4;font-size:0.8rem">Carregando...</div>
+      <div id="questsList"></div>
+    </div>
+  </div>
+
+  <!-- INVENTORY TAB -->
+  <div id="tab-inventory" class="tab-content">
+    <div style="padding:16px;">
+      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">🎒 MOCHILA</div>
+      <div class="inv-grid" id="inventoryGrid">
+        <div class="inv-empty">Mochila vazia</div>
       </div>
     </div>
+  </div>
 
+  <!-- SHOP TAB -->
+  <div id="tab-shop" class="tab-content">
+    <div style="padding:16px;">
+      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">🛒 LOJA</div>
+      <div class="inv-grid" id="shopGrid"><div class="inv-empty">Carregando...</div></div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD TAB -->
+  <div id="tab-leaderboard" class="tab-content">
+    <div style="padding:16px;">
+      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">
+        🏆 RANKING
+        <span style="margin-left:auto;font-size:0.75rem;font-family:'Noto Sans JP';cursor:pointer;float:right" onclick="fetchLeaderboard()">↻ atualizar</span>
+      </div>
+      <div id="lbBody"><div style="text-align:center;padding:20px;opacity:0.4;">Carregando...</div></div>
+    </div>
+  </div>
+
+  <!-- CHAT TAB -->
+  <div id="tab-chat" class="tab-content">
+    <div style="padding:16px;">
+      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">💬 CHAT GLOBAL</div>
+      <div class="chat-messages" id="chatMessages">
+        <div style="text-align:center;opacity:0.4;font-size:0.8rem;margin:auto;">Carregando mensagens...</div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Digite uma mensagem..." maxlength="200">
+        <button class="chat-send" onclick="sendChat()">ENVIAR</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-  // ── State ──
   let SESSION = { nick: '', password: '' };
   let currentTab = 'login';
-  const SERVER = '';  // vazio = mesmo domínio (Railway)
+  let chatInterval = null;
+  const SERVER = '';
+  const ICONS = { espada:'⚔️', escudo:'🛡️', pocao:'🧪', picareta:'⛏️' };
 
   // ── Login ──
   function switchTab(tab) {
@@ -424,95 +406,131 @@
     const nick = document.getElementById('loginNick').value.trim().toLowerCase();
     const pass = document.getElementById('loginPass').value;
     const msg = document.getElementById('loginMsg');
-    if (!nick || !pass) { msg.className = 'login-msg err'; msg.textContent = 'Preencha nick e senha!'; return; }
+    if (!nick || !pass) { msg.className='login-msg err'; msg.textContent='Preencha nick e senha!'; return; }
 
     if (currentTab === 'register') {
-      const res = await apiCall('/register', { nick, password: pass });
+      const res = await apiPost('/register', { nick, password: pass });
       if (!res) return;
-      if (res.error) { msg.className = 'login-msg err'; msg.textContent = res.error; return; }
-      msg.className = 'login-msg ok'; msg.textContent = res.message;
+      if (res.error) { msg.className='login-msg err'; msg.textContent=res.error; return; }
+      msg.className='login-msg ok'; msg.textContent=res.message;
       setTimeout(() => switchTab('login'), 1500);
       return;
     }
 
-    const res = await apiCall('/login', { nick, password: pass });
+    const res = await apiPost('/login', { nick, password: pass });
     if (!res) return;
-    if (res.error) { msg.className = 'login-msg err'; msg.textContent = res.error; return; }
+    if (res.error) { msg.className='login-msg err'; msg.textContent=res.error; return; }
 
     SESSION = { nick, password: pass };
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('gameScreen').style.display = 'block';
     document.getElementById('playerNickDisplay').textContent = nick.toUpperCase();
-    document.getElementById('statBalance').textContent = res.balance;
-    document.getElementById('statBank').textContent = res.bank;
-    document.getElementById('statTotal').textContent = res.total;
+    updateStats(res);
+    updateInventoryDisplay(res.inventory || []);
+    updateQuestsDisplay(res.quests || []);
     fetchShop();
     fetchLeaderboard();
+    startChat();
   }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
+    if (e.key === 'Enter') {
+      if (document.getElementById('loginScreen').style.display !== 'none') doLogin();
+      else if (document.getElementById('chatInput') === document.activeElement) sendChat();
+    }
   });
 
   function doLogout() {
     if (!confirm('Sair da conta?')) return;
     SESSION = { nick: '', password: '' };
+    if (chatInterval) clearInterval(chatInterval);
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('gameScreen').style.display = 'none';
     document.getElementById('loginNick').value = '';
     document.getElementById('loginPass').value = '';
     document.getElementById('loginMsg').textContent = '';
+    showTab('play');
+  }
+
+  // ── Tabs ──
+  function showTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.target.classList.add('active');
+    if (tab === 'leaderboard') fetchLeaderboard();
+    if (tab === 'chat') scrollChat();
   }
 
   // ── API ──
-  async function apiCall(path, body = {}) {
+  async function apiPost(path, body = {}) {
     try {
-      const r = await fetch(SERVER + path, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      const r = await fetch(SERVER + path, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
       return await r.json();
-    } catch(e) {
-      showBubble('error', 'ERRO DE CONEXAO', [['Dica', 'Verifique sua conexao']]);
-      return null;
-    }
+    } catch(e) { showBubble('error','ERRO DE CONEXAO',[['Dica','Verifique sua conexao']]); return null; }
   }
 
   async function apiGet(path) {
-    try {
-      const r = await fetch(SERVER + path);
-      return await r.json();
-    } catch(e) { return null; }
+    try { const r = await fetch(SERVER + path); return await r.json(); }
+    catch(e) { return null; }
   }
 
-  function authBody(extra = {}) {
-    return { nick: SESSION.nick, password: SESSION.password, ...extra };
+  function ab(extra={}) { return { nick: SESSION.nick, password: SESSION.password, ...extra }; }
+
+  // ── Stats ──
+  function updateStats(data) {
+    if (data.balance !== undefined) document.getElementById('statBalance').textContent = data.balance;
+    if (data.bank !== undefined) document.getElementById('statBank').textContent = data.bank;
+    const total = data.total ?? ((data.balance||0) + (data.bank||0));
+    document.getElementById('statTotal').textContent = total;
+    if (data.xp !== undefined) {
+      const xp = data.xp;
+      const lvl = data.level || 1;
+      const xpInLevel = xp % 100;
+      document.getElementById('headerXp').textContent = xp;
+      document.getElementById('headerLevel').textContent = lvl;
+      document.getElementById('xpBar').style.width = xpInLevel + '%';
+      document.getElementById('xpBarLabel').textContent = `${xpInLevel}/100 XP — Nível ${lvl}`;
+      if (data.title) document.getElementById('playerTitle').textContent = '· ' + data.title;
+    }
+  }
+
+  async function fetchBalance() {
+    const data = await apiPost('/balance', ab());
+    if (!data || data.error) return;
+    updateStats(data);
   }
 
   // ── Commands ──
   async function cmd(action) {
-    const data = await apiCall('/' + action, authBody());
+    const data = await apiPost('/' + action, ab());
     if (!data) return;
     handleResult(action, data);
-    if (!data.error) updateBalance(data);
+    if (!data.error) {
+      updateStats(data);
+      if (data.leveled_up) showLevelUp(data.level, data.title);
+      if (data.quest_rewards && data.quest_rewards.length) {
+        data.quest_rewards.forEach(q => showLevelUp(`QUEST: ${q.quest}`, `+${q.reward} coins!`));
+      }
+      refreshQuests();
+    }
   }
 
   async function cmdAmount(action, inputId) {
     const val = document.getElementById(inputId).value;
-    if (!val || val <= 0) { showBubble('error', 'VALOR INVALIDO', [['Info', 'Digite um valor maior que zero']]); return; }
-    const data = await apiCall('/' + action, authBody({ amount: parseInt(val) }));
+    if (!val || val <= 0) { showBubble('error','VALOR INVALIDO',[['Info','Digite um valor maior que zero']]); return; }
+    const data = await apiPost('/' + action, ab({ amount: parseInt(val) }));
     if (!data) return;
     handleResult(action, data);
-    if (!data.error) updateBalance(data);
+    if (!data.error) { fetchBalance(); refreshQuests(); }
   }
 
   async function cmdTransfer() {
     const target = document.getElementById('transferNick').value.trim().toLowerCase();
     const val = document.getElementById('transferVal').value;
-    if (!target) { showBubble('error', 'NICK INVALIDO', [['Info', 'Digite o nick do destinatario']]); return; }
-    if (!val || val <= 0) { showBubble('error', 'VALOR INVALIDO', [['Info', 'Digite um valor maior que zero']]); return; }
-    const data = await apiCall('/transfer', authBody({ target, amount: parseInt(val) }));
+    if (!target) { showBubble('error','NICK INVALIDO',[['Info','Digite o nick do destinatario']]); return; }
+    if (!val || val <= 0) { showBubble('error','VALOR INVALIDO',[['Info','Digite um valor']]); return; }
+    const data = await apiPost('/transfer', ab({ target, amount: parseInt(val) }));
     if (!data) return;
     handleResult('transfer', data);
     if (!data.error) fetchBalance();
@@ -520,106 +538,163 @@
 
   async function cmdRob() {
     const target = document.getElementById('robNick').value.trim().toLowerCase();
-    if (!target) { showBubble('error', 'NICK INVALIDO', [['Info', 'Digite o nick da vitima']]); return; }
-    const data = await apiCall('/rob', authBody({ target }));
+    if (!target) { showBubble('error','NICK INVALIDO',[['Info','Digite o nick da vitima']]); return; }
+    const data = await apiPost('/rob', ab({ target }));
     if (!data) return;
     handleResult('rob', data);
-    if (!data.error) fetchBalance();
+    if (!data.error) { fetchBalance(); if (data.leveled_up) showLevelUp(data.level, data.title); }
   }
 
   async function cmdSlots() {
     const val = document.getElementById('slotsVal').value;
-    if (!val || val <= 0) { showBubble('error', 'APOSTA INVALIDA', [['Info', 'Digite um valor para apostar']]); return; }
-    const data = await apiCall('/slots', authBody({ bet: parseInt(val) }));
+    if (!val || val <= 0) { showBubble('error','APOSTA INVALIDA',[['Info','Digite um valor']]); return; }
+    const data = await apiPost('/slots', ab({ bet: parseInt(val) }));
     if (!data) return;
     if (data.reels) {
-      const emojiMap = { cereja:'🍒', limao:'🍋', sino:'🔔', estrela:'⭐', diamante:'💎' };
-      document.getElementById('reelsDisplay').textContent = data.reels.map(r => emojiMap[r] || r).join('  ');
+      const em = { cereja:'🍒', limao:'🍋', sino:'🔔', estrela:'⭐', diamante:'💎' };
+      document.getElementById('reelsDisplay').textContent = data.reels.map(r=>em[r]||r).join('  ');
     }
     handleResult('slots', data);
-    if (!data.error) updateBalance(data);
+    if (!data.error) { updateStats(data); if (data.leveled_up) showLevelUp(data.level, data.title); }
   }
 
-  async function fetchBalance() {
-    const data = await apiCall('/balance', authBody());
+  // ── Quests ──
+  async function refreshQuests() {
+    const data = await apiPost('/quests', ab());
     if (!data || data.error) return;
-    updateBalance(data);
+    updateQuestsDisplay(data.quests);
   }
 
-  function updateBalance(data) {
-    if (data.balance !== undefined) document.getElementById('statBalance').textContent = data.balance;
-    if (data.bank !== undefined) document.getElementById('statBank').textContent = data.bank;
-    if (data.total !== undefined) document.getElementById('statTotal').textContent = data.total;
-    else if (data.balance !== undefined && data.bank !== undefined)
-      document.getElementById('statTotal').textContent = data.balance + data.bank;
+  function updateQuestsDisplay(quests) {
+    const list = document.getElementById('questsList');
+    if (!quests || !quests.length) { list.innerHTML = '<div style="text-align:center;opacity:0.4;padding:20px;">Nenhuma quest</div>'; return; }
+    list.innerHTML = quests.map(q => `
+      <div class="quest-item ${q.done ? 'done' : ''}">
+        <div class="quest-name">${q.done ? '✅' : '⬜'} ${q.desc}</div>
+        <div class="quest-progress">${q.current} / ${q.target}</div>
+        <div class="quest-reward">+${q.reward} 💰</div>
+        <div class="quest-bar"><div class="quest-bar-fill" style="width:${Math.min(100,q.current/q.target*100)}%"></div></div>
+      </div>`).join('');
   }
 
+  // ── Inventory ──
+  function updateInventoryDisplay(inventory) {
+    const grid = document.getElementById('inventoryGrid');
+    if (!inventory || !inventory.length) {
+      grid.innerHTML = '<div class="inv-empty">Mochila vazia — compre itens na loja!</div>'; return;
+    }
+    const SHOP = { espada:{description:"Aumenta ganhos no trabalho em +50"}, escudo:{description:"Protecao contra roubos"}, pocao:{description:"Recupera energia"}, picareta:{description:"Aumenta ganhos na mina em +100"} };
+    grid.innerHTML = inventory.map(item => `
+      <div class="inv-item">
+        <div class="inv-icon">${ICONS[item]||'📦'}</div>
+        <div class="inv-name">${item.toUpperCase()}</div>
+        <div class="inv-desc">${SHOP[item]?.description||''}</div>
+      </div>`).join('');
+  }
+
+  // ── Shop ──
   async function fetchShop() {
     const data = await apiGet('/shop');
     if (!data || !data.items) return;
     const grid = document.getElementById('shopGrid');
-    grid.innerHTML = '';
-    for (const [name, info] of Object.entries(data.items)) {
-      const icons = { espada:'⚔️', escudo:'🛡️', pocao:'🧪', picareta:'⛏️' };
-      grid.innerHTML += `
-        <div style="border:3px solid var(--ink);padding:10px;background:white;box-shadow:3px 3px 0 var(--ink);">
-          <div style="font-size:1.3rem;text-align:center">${icons[name]||'📦'}</div>
-          <div style="font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;text-align:center">${name.toUpperCase()}</div>
-          <div style="font-size:0.65rem;opacity:0.6;text-align:center;margin:3px 0">${info.description}</div>
-          <button onclick="buyItem('${name}')" style="width:100%;margin-top:6px;background:var(--gold);border:2px solid var(--ink);font-weight:900;font-size:0.75rem;padding:5px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);">
-            COMPRAR · ${info.price}
-          </button>
-        </div>`;
-    }
+    grid.innerHTML = Object.entries(data.items).map(([name, info]) => `
+      <div style="border:3px solid var(--ink);padding:10px;background:white;box-shadow:3px 3px 0 var(--ink);">
+        <div style="font-size:1.3rem;text-align:center">${ICONS[name]||'📦'}</div>
+        <div style="font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;text-align:center">${name.toUpperCase()}</div>
+        <div style="font-size:0.65rem;opacity:0.6;text-align:center;margin:3px 0">${info.description}</div>
+        <button onclick="buyItem('${name}')" style="width:100%;margin-top:6px;background:var(--gold);border:2px solid var(--ink);font-weight:900;font-size:0.75rem;padding:5px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);">
+          COMPRAR · ${info.price}
+        </button>
+      </div>`).join('');
   }
 
   async function buyItem(item) {
-    const data = await apiCall('/buy', authBody({ item }));
+    const data = await apiPost('/buy', ab({ item }));
     if (!data) return;
     handleResult('buy', data);
-    if (!data.error) fetchBalance();
+    if (!data.error) {
+      fetchBalance();
+      const inv = await apiPost('/inventory', ab());
+      if (inv && !inv.error) updateInventoryDisplay(Object.keys(inv.inventory));
+    }
   }
 
+  // ── Leaderboard ──
   async function fetchLeaderboard() {
     const data = await apiGet('/leaderboard');
     if (!data || !data.leaderboard) return;
     const body = document.getElementById('lbBody');
-    if (!data.leaderboard.length) {
-      body.innerHTML = '<div style="text-align:center;padding:16px;opacity:0.4;font-size:0.8rem">Sem jogadores ainda</div>';
-      return;
-    }
+    if (!data.leaderboard.length) { body.innerHTML='<div style="text-align:center;padding:20px;opacity:0.4;">Sem jogadores ainda</div>'; return; }
     const medals = ['first','second','third'];
     body.innerHTML = data.leaderboard.map((p, i) => `
       <div class="lb-row">
         <div class="lb-rank ${medals[i]||''}">${i===0?'👑':i+1}</div>
-        <div class="lb-nick">${p.nick}</div>
+        <div class="lb-info">
+          <div class="lb-nick">${p.nick}</div>
+          <div class="lb-title">${p.title} · Lv.${p.level}</div>
+        </div>
         <div class="lb-coins">${p.total} 💰</div>
       </div>`).join('');
   }
 
+  // ── Chat ──
+  function startChat() {
+    fetchChatMessages();
+    chatInterval = setInterval(fetchChatMessages, 5000);
+  }
+
+  async function fetchChatMessages() {
+    const data = await apiGet('/chat/messages');
+    if (!data) return;
+    const box = document.getElementById('chatMessages');
+    const wasBottom = box.scrollHeight - box.clientHeight <= box.scrollTop + 30;
+    box.innerHTML = data.messages.map(m => {
+      const isMe = m.nick === SESSION.nick;
+      const time = m.time ? new Date(m.time).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="chat-msg"><span class="chat-nick ${isMe?'me':''}">${m.nick}</span>${m.message}<span class="chat-time">${time}</span></div>`;
+    }).join('') || '<div style="text-align:center;opacity:0.4;font-size:0.8rem;margin:auto;">Nenhuma mensagem ainda</div>';
+    if (wasBottom) scrollChat();
+  }
+
+  function scrollChat() {
+    const box = document.getElementById('chatMessages');
+    box.scrollTop = box.scrollHeight;
+  }
+
+  async function sendChat() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message) return;
+    input.value = '';
+    const data = await apiPost('/chat/send', ab({ message }));
+    if (data && data.success) fetchChatMessages();
+  }
+
+  // ── Result ──
   function handleResult(action, data) {
-    if (data.error) { showBubble('error', 'BLOQUEADO', [['Motivo', data.error]]); return; }
-    const sfxMap = {
-      work: 'GRIND!!', daily: 'BONUS!!', mine: 'KANG!!',
-      crime: data.result === 'sucesso' ? 'HEIST!!' : 'BUSTED!!',
-      rob: data.result === 'sucesso' ? 'STOLEN!!' : 'CAUGHT!!',
-      slots: data.result === 'JACKPOT!' ? 'JACKPOT!!' : data.result === 'ganhou!' ? 'WIN!!' : 'MISS..',
-      deposit: 'SAVED!!', withdraw: 'CASH!!', transfer: 'SENT!!', buy: 'GOT IT!!'
+    if (data.error) { showBubble('error','BLOQUEADO',[['Motivo',data.error]]); return; }
+    const sfx = {
+      work:'GRIND!!', daily:'BONUS!!', mine:'KANG!!',
+      crime: data.result==='sucesso'?'HEIST!!':'BUSTED!!',
+      rob: data.result==='sucesso'?'STOLEN!!':'CAUGHT!!',
+      slots: data.result==='JACKPOT!'?'JACKPOT!!':data.result==='ganhou!'?'WIN!!':'MISS..',
+      deposit:'SAVED!!', withdraw:'CASH!!', transfer:'SENT!!', buy:'GOT IT!!'
     };
     const rows = [];
-    if (data.earned !== undefined)    rows.push(['Ganhou', '+' + data.earned, 'pos']);
-    if (data.reward !== undefined)    rows.push(['Recompensa', '+' + data.reward, 'pos']);
-    if (data.fine !== undefined)      rows.push(['Multa', '-' + data.fine, 'neg']);
-    if (data.stolen !== undefined)    rows.push(['Roubado', '+' + data.stolen, 'pos']);
-    if (data.winnings !== undefined)  rows.push(['Ganhos', data.winnings > 0 ? '+' + data.winnings : '0', data.winnings > 0 ? 'pos' : 'neg']);
-    if (data.deposited !== undefined) rows.push(['Depositado', data.deposited, 'gold-c']);
-    if (data.withdrawn !== undefined) rows.push(['Sacado', data.withdrawn, 'gold-c']);
-    if (data.amount !== undefined)    rows.push(['Transferido', data.amount, 'gold-c']);
-    if (data.bought !== undefined)    rows.push(['Comprado', data.bought, 'gold-c']);
-    if (data.balance !== undefined)   rows.push(['Carteira', data.balance, '']);
-    if (data.result !== undefined && action !== 'slots') rows.push(['Resultado', data.result, '']);
-    const isSuccess = !data.error && data.result !== 'preso' && data.result !== 'falhou' && data.result !== 'perdeu';
-    showBubble(isSuccess ? 'success' : 'error', sfxMap[action] || 'OK!', rows);
+    if (data.earned !== undefined)    rows.push(['Ganhou','+'+data.earned,'pos']);
+    if (data.reward !== undefined)    rows.push(['Recompensa','+'+data.reward,'pos']);
+    if (data.fine !== undefined)      rows.push(['Multa','-'+data.fine,'neg']);
+    if (data.stolen !== undefined)    rows.push(['Roubado','+'+data.stolen,'pos']);
+    if (data.winnings !== undefined)  rows.push(['Ganhos',data.winnings>0?'+'+data.winnings:'0',data.winnings>0?'pos':'neg']);
+    if (data.deposited !== undefined) rows.push(['Depositado',data.deposited,'gold-c']);
+    if (data.withdrawn !== undefined) rows.push(['Sacado',data.withdrawn,'gold-c']);
+    if (data.amount !== undefined)    rows.push(['Transferido',data.amount,'gold-c']);
+    if (data.bought !== undefined)    rows.push(['Comprado',data.bought,'gold-c']);
+    if (data.xp_gain && data.xp_gain > 0) rows.push(['+XP','+'+data.xp_gain,'blue-c']);
+    if (data.balance !== undefined)   rows.push(['Carteira',data.balance,'']);
+    if (data.result !== undefined && action!=='slots') rows.push(['Resultado',data.result,'']);
+    const ok = !data.error && data.result!=='preso' && data.result!=='falhou' && data.result!=='perdeu';
+    showBubble(ok?'success':'error', sfx[action]||'OK!', rows);
   }
 
   function showBubble(type, title, rows) {
@@ -629,10 +704,18 @@
     bubble.classList.add('show');
     titleEl.className = 'bubble-title ' + type;
     titleEl.textContent = title;
-    content.innerHTML = rows.map(([k, v, cls]) =>
+    content.innerHTML = rows.map(([k,v,cls]) =>
       `<div class="data-row"><span class="data-key">${k}</span><span class="data-val ${cls||''}">${v}</span></div>`
     ).join('');
-    bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    bubble.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  function showLevelUp(level, title) {
+    const el = document.createElement('div');
+    el.className = 'levelup-popup';
+    el.textContent = typeof level === 'number' ? `⬆️ LEVEL ${level} — ${title}!` : `⭐ ${level} ${title}`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2800);
   }
 </script>
 </body>
