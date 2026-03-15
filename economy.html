@@ -6,22 +6,16 @@
 <title>EON ☄️</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink:#0a0a0f; --paper:#f5f0e8; --red:#e8162a;
-    --gold:#f5c400; --blue:#1a3a8f; --panel:#fffdf5;
-    --green:#1a8f4a; --shadow:5px 5px 0px var(--ink);
-  }
+  :root{--ink:#0a0a0f;--paper:#f5f0e8;--red:#e8162a;--gold:#f5c400;--blue:#1a3a8f;--panel:#fffdf5;--green:#1a8f4a;--shadow:5px 5px 0px var(--ink);}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--paper);font-family:'Noto Sans JP',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;
-    background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.07) 39px,rgba(0,0,0,0.07) 40px),
-    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.04) 39px,rgba(0,0,0,0.04) 40px);}
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.07) 39px,rgba(0,0,0,0.07) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.04) 39px,rgba(0,0,0,0.04) 40px);}
 
-  /* LOGIN */
   #loginScreen{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:center;
     background-image:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 4deg,rgba(255,255,255,0.02) 4deg,rgba(255,255,255,0.02) 5deg);}
   .login-box{border:4px solid var(--gold);background:var(--ink);padding:32px 24px;width:90%;max-width:360px;box-shadow:8px 8px 0 var(--red);animation:popIn 0.3s ease;}
   @keyframes popIn{0%{transform:scale(0.8);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
-  .login-logo{font-family:'Bangers',cursive;font-size:3rem;color:var(--gold);letter-spacing:6px;text-shadow:4px 4px 0 var(--red);text-align:center;margin-bottom:6px;}
+  .login-logo{font-family:'Bangers',cursive;font-size:3rem;color:var(--gold);letter-spacing:6px;text-shadow:4px 4px 0 var(--red);text-align:center;margin-bottom:4px;}
   .login-sub{text-align:center;color:rgba(245,196,0,0.5);font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;}
   .login-tabs{display:flex;margin-bottom:20px;border:3px solid var(--gold);}
   .login-tab{flex:1;padding:8px;text-align:center;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:2px;cursor:pointer;color:rgba(245,196,0,0.5);background:transparent;border:none;}
@@ -32,9 +26,8 @@
   .login-btn{display:block;width:100%;background:var(--gold);border:3px solid var(--gold);color:var(--ink);font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:3px;padding:10px;cursor:pointer;box-shadow:4px 4px 0 var(--red);margin-top:4px;}
   .login-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--red);}
   .login-msg{margin-top:12px;font-size:0.78rem;font-weight:700;text-align:center;min-height:20px;}
-  .login-msg.err{color:var(--red);} .login-msg.ok{color:#4aff8c;}
+  .login-msg.err{color:var(--red);}.login-msg.ok{color:#4aff8c;}
 
-  /* GAME */
   #gameScreen{display:none;}
   header{background:var(--ink);border-bottom:5px solid var(--red);position:relative;overflow:hidden;}
   .speed-lines{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 4deg,rgba(255,255,255,0.03) 4deg,rgba(255,255,255,0.03) 5deg);}
@@ -47,20 +40,18 @@
   .xp-badge .lbl{font-size:0.55rem;opacity:0.7;display:block;}
 
   .game-tabs{display:flex;background:var(--ink);border-bottom:4px solid var(--red);overflow-x:auto;}
-  .game-tab{flex:1;min-width:55px;padding:10px 4px;text-align:center;font-family:'Bangers',cursive;font-size:0.8rem;letter-spacing:1px;cursor:pointer;color:rgba(255,255,255,0.4);background:transparent;border:none;border-bottom:3px solid transparent;white-space:nowrap;}
+  .game-tab{flex:1;min-width:50px;padding:10px 4px;text-align:center;font-family:'Bangers',cursive;font-size:0.78rem;letter-spacing:1px;cursor:pointer;color:rgba(255,255,255,0.4);background:transparent;border:none;border-bottom:3px solid transparent;white-space:nowrap;}
   .game-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-
-  .tab-content{display:none;} .tab-content.active{display:block;}
+  .tab-content{display:none;}.tab-content.active{display:block;}
 
   .balance-panel{margin:16px;border:4px solid var(--ink);background:var(--panel);box-shadow:var(--shadow);position:relative;overflow:hidden;}
   .balance-panel::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 50px 50px 0;border-color:transparent var(--red) transparent transparent;}
   .balance-header{background:var(--ink);color:var(--gold);font-family:'Bangers',cursive;font-size:1rem;letter-spacing:2px;padding:6px 14px;display:flex;align-items:center;gap:8px;}
   .balance-body{display:flex;padding:14px;gap:12px;}
   .stat-box{flex:1;border:3px solid var(--ink);padding:10px;text-align:center;background:white;}
-  .stat-box.gold-bg{background:var(--gold);} .stat-box.blue-bg{background:var(--blue);color:white;}
+  .stat-box.gold-bg{background:var(--gold);}.stat-box.blue-bg{background:var(--blue);color:white;}
   .stat-label{font-size:0.6rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;opacity:0.7;}
   .stat-val{font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:1px;line-height:1.1;}
-
   .xp-bar-wrap{margin:0 16px 16px;border:3px solid var(--ink);background:white;height:14px;position:relative;box-shadow:3px 3px 0 var(--ink);}
   .xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width 0.5s ease;}
   .xp-bar-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:var(--ink);mix-blend-mode:multiply;}
@@ -70,14 +61,12 @@
   .panel.full{grid-column:1/-1;}
   .panel-title{background:var(--ink);color:white;font-family:'Bangers',cursive;font-size:0.95rem;letter-spacing:2px;padding:5px 12px;display:flex;align-items:center;gap:6px;}
   .panel-body{padding:10px;}
-
   .cmd-btn{display:block;width:100%;margin-bottom:8px;background:white;border:3px solid var(--ink);padding:9px 12px;cursor:pointer;text-align:left;font-family:'Noto Sans JP',sans-serif;font-size:0.78rem;font-weight:700;box-shadow:3px 3px 0 var(--ink);transition:transform 0.1s,box-shadow 0.1s;position:relative;overflow:hidden;color:var(--ink);}
-  .cmd-btn:last-child{margin-bottom:0;} .cmd-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink);}
+  .cmd-btn:last-child{margin-bottom:0;}.cmd-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink);}
   .cmd-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
-  .cmd-btn.red::before{background:var(--red);} .cmd-btn.gold::before{background:var(--gold);} .cmd-btn.blue::before{background:var(--blue);}
-  .cmd-btn .btn-name{font-size:0.85rem;display:block;} .cmd-btn .btn-desc{font-size:0.65rem;opacity:0.6;display:block;margin-top:1px;}
-  .cmd-btn.red:hover{background:#fff0f0;} .cmd-btn.gold:hover{background:#fffbe0;} .cmd-btn.blue:hover{background:#f0f3ff;}
-
+  .cmd-btn.gold::before{background:var(--gold);}.cmd-btn.blue::before{background:var(--blue);}
+  .cmd-btn .btn-name{font-size:0.85rem;display:block;}.cmd-btn .btn-desc{font-size:0.65rem;opacity:0.6;display:block;margin-top:1px;}
+  .cmd-btn.gold:hover{background:#fffbe0;}.cmd-btn.blue:hover{background:#f0f3ff;}
   .input-row{display:flex;gap:6px;margin-bottom:8px;}
   .mini-input{flex:1;border:3px solid var(--ink);padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;font-weight:700;outline:none;background:white;min-width:0;}
   .mini-input:focus{background:#fffbe0;}
@@ -89,87 +78,93 @@
   .speech-bubble.show{display:block;}
   .speech-bubble::before{content:'▲';position:absolute;top:-18px;left:24px;font-size:1rem;color:var(--ink);}
   .bubble-title{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:2px;margin-bottom:8px;}
-  .bubble-title.success{color:var(--green);} .bubble-title.error{color:var(--red);} .bubble-title.info{color:var(--blue);}
+  .bubble-title.success{color:var(--green);}.bubble-title.error{color:var(--red);}.bubble-title.info{color:var(--blue);}
   .bubble-content{font-size:0.82rem;line-height:1.6;}
   .data-row{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(0,0,0,0.15);padding:3px 0;font-size:0.8rem;}
   .data-row:last-child{border-bottom:none;}
   .data-key{opacity:0.6;font-size:0.72rem;text-transform:uppercase;}
-  .data-val{font-weight:900;} .data-val.pos{color:var(--green);} .data-val.neg{color:var(--red);} .data-val.gold-c{color:#b8900a;} .data-val.blue-c{color:var(--blue);}
+  .data-val{font-weight:900;}.data-val.pos{color:var(--green);}.data-val.neg{color:var(--red);}.data-val.gold-c{color:#b8900a;}.data-val.blue-c{color:var(--blue);}
 
-  /* QUEST */
+  .click-zone{margin:0 16px 12px;border:4px solid var(--ink);background:var(--panel);box-shadow:var(--shadow);overflow:hidden;}
+  .click-header{background:var(--ink);color:var(--gold);font-family:'Bangers',cursive;font-size:1rem;letter-spacing:2px;padding:6px 14px;display:flex;align-items:center;justify-content:space-between;}
+  .click-body{padding:16px;text-align:center;}
+  .click-rock{font-size:5rem;cursor:pointer;user-select:none;display:inline-block;transition:transform 0.08s;filter:drop-shadow(3px 3px 0 rgba(0,0,0,0.3));}
+  .click-rock:active{transform:scale(0.85);}
+  .click-stats{display:flex;gap:10px;margin-top:12px;justify-content:center;flex-wrap:wrap;}
+  .click-stat{border:3px solid var(--ink);padding:6px 12px;background:white;text-align:center;box-shadow:2px 2px 0 var(--ink);}
+  .click-stat .cs-label{font-size:0.58rem;font-weight:900;text-transform:uppercase;opacity:0.6;}
+  .click-stat .cs-val{font-family:'Bangers',cursive;font-size:1.1rem;color:var(--blue);}
+  .click-stat .cs-val.gold{color:#b8900a;}
+  .cps-display{font-family:'Bangers',cursive;font-size:1.6rem;color:var(--green);margin-top:8px;}
+  .cps-label{font-size:0.65rem;opacity:0.6;}
+
+  .float-coin{position:fixed;pointer-events:none;font-family:'Bangers',cursive;font-size:1.1rem;color:var(--gold);text-shadow:1px 1px 0 var(--ink);z-index:9999;animation:floatUp 0.9s ease forwards;}
+  @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.7)}}
+
+  .zone-card{border:4px solid var(--ink);margin-bottom:12px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden;}
+  .zone-header{padding:10px 14px;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:2px;display:flex;align-items:center;gap:8px;border-bottom:3px solid var(--ink);}
+  .zone-body{padding:10px;}
+  .zone-locked{opacity:0.5;}
+  .miner-row{display:flex;align-items:center;gap:8px;border-bottom:2px dashed rgba(0,0,0,0.1);padding:8px 0;}
+  .miner-row:last-child{border-bottom:none;}
+  .miner-info{flex:1;}
+  .miner-name{font-weight:900;font-size:0.82rem;}
+  .miner-cps{font-size:0.62rem;color:var(--green);font-weight:700;}
+  .miner-qty{font-family:'Bangers',cursive;font-size:1.2rem;color:var(--blue);min-width:32px;text-align:center;}
+  .miner-buy-btn{background:var(--gold);border:2px solid var(--ink);font-weight:900;font-size:0.7rem;padding:6px 8px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap;line-height:1.2;}
+  .miner-buy-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink);}
+  .lock-badge{background:var(--red);color:white;font-size:0.6rem;font-weight:900;padding:2px 6px;}
+
+  .afk-bar-wrap{border:3px solid var(--ink);background:white;height:20px;position:relative;box-shadow:3px 3px 0 var(--ink);margin-bottom:10px;}
+  .afk-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));transition:width 1s linear;}
+  .afk-bar-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:900;color:var(--ink);mix-blend-mode:multiply;}
+  .collect-btn{display:block;width:100%;background:var(--green);border:3px solid var(--ink);color:white;font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:2px;padding:10px;cursor:pointer;box-shadow:var(--shadow);text-align:center;margin-bottom:12px;}
+  .collect-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
+
   .quest-item{border:3px solid var(--ink);padding:10px;margin-bottom:8px;background:white;box-shadow:3px 3px 0 var(--ink);position:relative;}
   .quest-item.done{background:#f0fff5;border-color:var(--green);}
   .quest-item:last-child{margin-bottom:0;}
-  .quest-name{font-size:0.82rem;font-weight:900;} .quest-progress{font-size:0.68rem;opacity:0.6;margin-top:2px;}
+  .quest-name{font-size:0.82rem;font-weight:900;}.quest-progress{font-size:0.68rem;opacity:0.6;margin-top:2px;}
   .quest-reward{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:'Bangers',cursive;font-size:0.9rem;color:#b8900a;}
   .quest-bar{height:6px;background:#eee;border:2px solid var(--ink);margin-top:6px;}
   .quest-bar-fill{height:100%;background:var(--gold);transition:width 0.4s;}
   .quest-item.done .quest-bar-fill{background:var(--green);}
 
-  /* INVENTORY / SHOP */
   .inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .inv-item{border:3px solid var(--ink);padding:10px;background:white;box-shadow:3px 3px 0 var(--ink);text-align:center;}
-  .inv-icon{font-size:1.6rem;} .inv-name{font-family:'Bangers',cursive;font-size:0.95rem;letter-spacing:1px;margin-top:4px;}
-  .inv-desc{font-size:0.62rem;opacity:0.6;margin-top:2px;} .inv-effect{font-size:0.65rem;color:var(--blue);font-weight:900;margin-top:4px;}
   .inv-empty{text-align:center;padding:20px;opacity:0.4;font-size:0.85rem;grid-column:1/-1;}
 
-  /* LEADERBOARD */
   .lb-row{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--ink);padding:7px 0;}
   .lb-row:last-child{border-bottom:none;}
   .lb-rank{font-family:'Bangers',cursive;font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;}
-  .lb-rank.first{color:var(--gold);} .lb-rank.second{color:#aaa;} .lb-rank.third{color:#b87333;}
-  .lb-info{flex:1;} .lb-nick{font-size:0.82rem;font-weight:900;} .lb-title{font-size:0.62rem;opacity:0.6;}
+  .lb-rank.first{color:var(--gold);}.lb-rank.second{color:#aaa;}.lb-rank.third{color:#b87333;}
+  .lb-info{flex:1;}.lb-nick{font-size:0.82rem;font-weight:900;}.lb-title{font-size:0.62rem;opacity:0.6;}
   .lb-coins{font-weight:900;font-size:0.85rem;color:#b8900a;}
 
-  /* CHAT */
   .chat-messages{height:260px;overflow-y:auto;border:3px solid var(--ink);background:white;padding:10px;margin-bottom:10px;display:flex;flex-direction:column;gap:6px;}
   .chat-msg{font-size:0.8rem;line-height:1.4;}
-  .chat-nick{font-weight:900;color:var(--blue);margin-right:4px;} .chat-nick.me{color:var(--red);}
+  .chat-nick{font-weight:900;color:var(--blue);margin-right:4px;}.chat-nick.me{color:var(--red);}
   .chat-time{font-size:0.6rem;opacity:0.4;margin-left:4px;}
   .chat-input-row{display:flex;gap:6px;}
   .chat-input{flex:1;border:3px solid var(--ink);padding:8px 12px;font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;font-weight:700;outline:none;background:white;}
   .chat-input:focus{background:#fffbe0;}
   .chat-send{background:var(--ink);color:var(--gold);border:3px solid var(--ink);padding:8px 16px;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;cursor:pointer;}
 
-  /* MINERAÇÃO AFK */
-  .zone-card{border:4px solid var(--ink);margin-bottom:12px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden;}
-  .zone-header{padding:10px 14px;font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
-  .zone-body{padding:12px;}
-  .zone-locked{opacity:0.5;background:#eee;}
-  .miner-card{border:3px solid var(--ink);padding:10px;margin-bottom:8px;background:white;box-shadow:3px 3px 0 var(--ink);display:flex;align-items:center;gap:10px;}
-  .miner-card:last-child{margin-bottom:0;}
-  .miner-info{flex:1;}
-  .miner-name{font-weight:900;font-size:0.82rem;}
-  .miner-rate{font-size:0.65rem;opacity:0.6;}
-  .miner-qty{font-family:'Bangers',cursive;font-size:1.1rem;color:var(--blue);min-width:30px;text-align:center;}
-  .miner-buy{background:var(--gold);border:2px solid var(--ink);font-weight:900;font-size:0.72rem;padding:6px 10px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap;}
-  .miner-buy:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink);}
-  .afk-collect-btn{display:block;width:100%;background:var(--green);border:3px solid var(--ink);color:white;font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:2px;padding:12px;cursor:pointer;box-shadow:var(--shadow);margin-bottom:12px;text-align:center;}
-  .afk-collect-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
-  .afk-status{border:3px solid var(--ink);background:var(--ink);color:var(--gold);padding:12px;margin-bottom:12px;font-size:0.85rem;}
-  .afk-status .afk-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(245,196,0,0.2);}
-  .afk-status .afk-row:last-child{border-bottom:none;}
-  .afk-val{font-family:'Bangers',cursive;font-size:1rem;color:var(--gold);}
-
-  .lock-badge{background:var(--red);color:white;font-size:0.65rem;font-weight:900;padding:2px 8px;display:inline-block;margin-left:8px;}
-
-  .cooldown-tag{display:inline-block;background:var(--ink);color:var(--gold);font-size:0.6rem;font-weight:900;padding:1px 5px;margin-left:4px;vertical-align:middle;}
-
-  /* LEVEL UP */
-  .levelup-popup{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);border:4px solid var(--ink);padding:12px 24px;font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:3px;box-shadow:6px 6px 0 var(--ink);z-index:999;animation:slideDown 0.4s ease,fadeOut 0.4s ease 2.2s forwards;pointer-events:none;}
+  .levelup-popup{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);border:4px solid var(--ink);padding:12px 24px;font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:3px;box-shadow:6px 6px 0 var(--ink);z-index:9999;animation:slideDown 0.4s ease,fadeOut 0.4s ease 2.2s forwards;pointer-events:none;text-align:center;}
   @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
   @keyframes fadeOut{to{opacity:0;transform:translateX(-50%) translateY(-20px)}}
 
-  ::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--paper);} ::-webkit-scrollbar-thumb{background:var(--ink);}
+  .cooldown-tag{display:inline-block;background:var(--ink);color:var(--gold);font-size:0.6rem;font-weight:900;padding:1px 5px;margin-left:4px;vertical-align:middle;}
+  ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--paper);}::-webkit-scrollbar-thumb{background:var(--ink);}
+  .page-pad{padding:16px;}
+  .section-title{font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">☄️ EON</div>
-    <div class="login-sub">Economy · Mine · Survive</div>
+    <div class="login-sub">Mine · Idle · Survive</div>
     <div class="login-tabs">
       <button class="login-tab active" id="tabLogin" onclick="switchTab('login')">ENTRAR</button>
       <button class="login-tab" id="tabRegister" onclick="switchTab('register')">CRIAR CONTA</button>
@@ -181,7 +176,6 @@
   </div>
 </div>
 
-<!-- GAME -->
 <div id="gameScreen">
   <header>
     <div class="speed-lines"></div>
@@ -189,7 +183,7 @@
       <div class="logo">☄️ EON</div>
       <div class="player-info">
         <div class="xp-badge">
-          <span class="lbl">NÍVEL · XP</span>
+          <span class="lbl">NÍV · XP</span>
           <span id="headerLevel">1</span> · <span id="headerXp">0</span>
         </div>
         <div class="player-badge" onclick="doLogout()">
@@ -201,22 +195,22 @@
   </header>
 
   <div class="game-tabs">
-    <button class="game-tab active" onclick="showTab('play',this)">⚔️ JOGAR</button>
-    <button class="game-tab" onclick="showTab('mining',this)">⛏️ MINA</button>
+    <button class="game-tab active" onclick="showTab('mine',this)">⛏️ MINA</button>
+    <button class="game-tab" onclick="showTab('play',this)">💼 AÇÕES</button>
+    <button class="game-tab" onclick="showTab('miners',this)">🤖 MINEIROS</button>
     <button class="game-tab" onclick="showTab('quests',this)">📜 QUESTS</button>
-    <button class="game-tab" onclick="showTab('inventory',this)">🎒 MOCHILA</button>
     <button class="game-tab" onclick="showTab('shop',this)">🛒 LOJA</button>
     <button class="game-tab" onclick="showTab('leaderboard',this)">🏆 TOP</button>
     <button class="game-tab" onclick="showTab('chat',this)">💬 CHAT</button>
   </div>
 
-  <!-- PLAY -->
-  <div id="tab-play" class="tab-content active">
+  <!-- MINE -->
+  <div id="tab-mine" class="tab-content active">
     <div class="balance-panel">
       <div class="balance-header">
-        💰 STATUS
-        <span id="playerTitle" style="font-size:0.75rem;opacity:0.8;margin-left:4px;"></span>
-        <span style="margin-left:auto;font-size:0.75rem;cursor:pointer;text-decoration:underline" onclick="fetchBalance()">↻</span>
+        💰 SALDO
+        <span id="playerTitle" style="font-size:0.72rem;opacity:0.8;margin-left:4px;"></span>
+        <span style="margin-left:auto;font-size:0.72rem;cursor:pointer;text-decoration:underline" onclick="fetchBalance()">↻</span>
       </div>
       <div class="balance-body">
         <div class="stat-box gold-bg"><div class="stat-label">Carteira</div><div class="stat-val" id="statBalance">—</div></div>
@@ -229,13 +223,50 @@
       <div class="xp-bar-label" id="xpBarLabel">0 XP</div>
     </div>
 
+    <div class="click-zone">
+      <div class="click-header">
+        <span id="zoneName">🪨 MINA DE CARVAO</span>
+        <span id="cpsDisplay" style="font-size:0.8rem;color:var(--gold)">0 coins/seg</span>
+      </div>
+      <div class="click-body">
+        <div class="click-rock" id="clickRock" onclick="doClick(event)">🪨</div>
+        <div class="cps-display" id="localBalanceDisplay">0</div>
+        <div class="cps-label">coins (tempo real)</div>
+        <div class="click-stats">
+          <div class="click-stat">
+            <div class="cs-label">por clique</div>
+            <div class="cs-val gold" id="clickPowerDisplay">+5</div>
+          </div>
+          <div class="click-stat">
+            <div class="cs-label">mineiros</div>
+            <div class="cs-val" id="totalMinersDisplay">0</div>
+          </div>
+          <div class="click-stat">
+            <div class="cs-label">total cliques</div>
+            <div class="cs-val" id="totalClickedDisplay">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 16px 16px;">
+      <div class="afk-bar-wrap">
+        <div class="afk-bar-fill" id="afkBar" style="width:0%"></div>
+        <div class="afk-bar-label" id="afkBarLabel">0 / 2000 pendente</div>
+      </div>
+      <button class="collect-btn" onclick="collectAfk()">💰 COLETAR MINERAÇÃO AFK</button>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div id="tab-play" class="tab-content">
+    <div style="height:12px;"></div>
     <div class="result-area">
       <div class="speech-bubble" id="resultBubble">
         <div class="bubble-title" id="bubbleTitle">RESULTADO</div>
         <div class="bubble-content" id="bubbleContent"></div>
       </div>
     </div>
-
     <div class="panels-grid">
       <div class="panel">
         <div class="panel-title"><span>⚡</span> ACOES</div>
@@ -248,13 +279,8 @@
             <span class="btn-name">🎁 Daily</span>
             <span class="btn-desc">+200~500 coins · +30xp <span class="cooldown-tag">24h</span></span>
           </button>
-          <button class="cmd-btn blue" onclick="cmd('mine')">
-            <span class="btn-name">⛏️ Minerar (manual)</span>
-            <span class="btn-desc">+30~120 coins · +15xp <span class="cooldown-tag">1h</span></span>
-          </button>
         </div>
       </div>
-
       <div class="panel">
         <div class="panel-title"><span>🏦</span> BANCO</div>
         <div class="panel-body">
@@ -267,7 +293,7 @@
             <button class="mini-btn" onclick="cmdAmount('withdraw','withdrawVal')">SAC</button>
           </div>
           <div style="border-top:2px dashed var(--ink);padding-top:8px;margin-top:4px;">
-            <div style="font-size:0.68rem;font-weight:900;text-transform:uppercase;opacity:0.6;margin-bottom:6px;">Transferir:</div>
+            <div style="font-size:0.68rem;font-weight:900;opacity:0.6;margin-bottom:6px;">TRANSFERIR:</div>
             <input class="mini-input" id="transferNick" type="text" placeholder="nick..." style="margin-bottom:6px;width:100%;display:block;">
             <div class="input-row">
               <input class="mini-input" id="transferVal" type="number" placeholder="Valor...">
@@ -276,7 +302,6 @@
           </div>
         </div>
       </div>
-
       <div class="panel full">
         <div class="panel-title"><span>🎰</span> SLOTS</div>
         <div class="panel-body" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
@@ -293,69 +318,43 @@
     </div>
   </div>
 
-  <!-- MINING -->
-  <div id="tab-mining" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:4px;">⛏️ MINERACAO AFK</div>
-      <div style="font-size:0.72rem;opacity:0.6;margin-bottom:12px;">Seus mineradores trabalham enquanto você está offline!</div>
-
-      <div class="afk-status" id="afkStatus">
-        <div class="afk-row"><span>Pendente</span><span class="afk-val" id="afkPending">0 coins</span></div>
-        <div class="afk-row"><span>Taxa total</span><span class="afk-val" id="afkRate">0/min</span></div>
-        <div class="afk-row"><span>Capacidade</span><span class="afk-val" id="afkCapacity">2000</span></div>
-      </div>
-
-      <button class="afk-collect-btn" onclick="collectAfk()">💰 COLETAR MINERAÇÃO</button>
-
-      <div id="zonesContainer"></div>
+  <!-- MINERS -->
+  <div id="tab-miners" class="tab-content">
+    <div class="page-pad">
+      <div class="section-title">🤖 MINEIROS <span style="font-size:0.65rem;font-family:'Noto Sans JP';font-weight:700;opacity:0.5;">trabalham offline!</span></div>
+      <div id="minersContainer"><div style="text-align:center;opacity:0.4;padding:20px;">Carregando...</div></div>
     </div>
   </div>
 
   <!-- QUESTS -->
   <div id="tab-quests" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">
-        📜 MISSOES DIARIAS
-        <span style="font-size:0.7rem;font-family:'Noto Sans JP';font-weight:700;opacity:0.5;margin-left:8px;">Resetam à meia-noite</span>
-      </div>
+    <div class="page-pad">
+      <div class="section-title">📜 MISSOES DIARIAS <span style="font-size:0.65rem;font-family:'Noto Sans JP';font-weight:700;opacity:0.5;">resetam à meia-noite</span></div>
       <div id="questsList"></div>
-    </div>
-  </div>
-
-  <!-- INVENTORY -->
-  <div id="tab-inventory" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">🎒 MOCHILA</div>
-      <div class="inv-grid" id="inventoryGrid"><div class="inv-empty">Mochila vazia</div></div>
     </div>
   </div>
 
   <!-- SHOP -->
   <div id="tab-shop" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">🛒 LOJA</div>
+    <div class="page-pad">
+      <div class="section-title">🛒 LOJA</div>
       <div class="inv-grid" id="shopGrid"><div class="inv-empty">Carregando...</div></div>
     </div>
   </div>
 
   <!-- LEADERBOARD -->
   <div id="tab-leaderboard" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">
-        🏆 RANKING
-        <span style="float:right;font-size:0.75rem;font-family:'Noto Sans JP';cursor:pointer;" onclick="fetchLeaderboard()">↻ atualizar</span>
-      </div>
+    <div class="page-pad">
+      <div class="section-title">🏆 RANKING <span style="float:right;font-size:0.75rem;font-family:'Noto Sans JP';cursor:pointer;" onclick="fetchLeaderboard()">↻</span></div>
       <div id="lbBody"><div style="text-align:center;padding:20px;opacity:0.4;">Carregando...</div></div>
     </div>
   </div>
 
   <!-- CHAT -->
   <div id="tab-chat" class="tab-content">
-    <div style="padding:16px;">
-      <div style="font-family:'Bangers',cursive;font-size:1.2rem;letter-spacing:2px;margin-bottom:12px;border-bottom:3px solid var(--ink);padding-bottom:6px;">💬 CHAT GLOBAL</div>
-      <div class="chat-messages" id="chatMessages">
-        <div style="text-align:center;opacity:0.4;font-size:0.8rem;margin:auto;">Carregando...</div>
-      </div>
+    <div class="page-pad">
+      <div class="section-title">💬 CHAT GLOBAL</div>
+      <div class="chat-messages" id="chatMessages"><div style="text-align:center;opacity:0.4;font-size:0.8rem;margin:auto;">Carregando...</div></div>
       <div class="chat-input-row">
         <input class="chat-input" id="chatInput" type="text" placeholder="Digite uma mensagem..." maxlength="200">
         <button class="chat-send" onclick="sendChat()">ENVIAR</button>
@@ -365,55 +364,60 @@
 </div>
 
 <script>
-  let SESSION = {nick:'',password:''};
-  let currentLoginTab = 'login';
-  let chatInterval = null;
-  let zonesData = null;
-  let playerLevel = 1;
-  const SERVER = '';
-  const ICONS = {espada:'⚔️',picareta:'⛏️',mochila:'🎒',amuleto:'🔮'};
+  let SESSION={nick:'',password:''};
+  let currentLoginTab='login';
+  let chatInterval=null,idleInterval=null,saveInterval=null;
+  let zonesData=null,playerLevel=1;
+  let localBalance=0,serverBalance=0,currentCps=0;
+  let afkPending=0,afkCapacity=2000,clickPower=5;
+  let currentZone=1,currentMiners={},totalClicked=0;
+  const SERVER='';
+  const ICONS={espada:'⚔️',picareta:'⛏️',mochila:'🎒',amuleto:'🔮'};
 
-  // ── Login ──
-  function switchTab(tab) {
-    currentLoginTab = tab;
-    document.getElementById('tabLogin').classList.toggle('active', tab==='login');
-    document.getElementById('tabRegister').classList.toggle('active', tab==='register');
-    document.getElementById('loginBtn').textContent = tab==='login' ? 'ENTRAR ⚔️' : 'CRIAR CONTA ☄️';
-    document.getElementById('loginMsg').textContent = '';
+  function switchTab(tab){
+    currentLoginTab=tab;
+    document.getElementById('tabLogin').classList.toggle('active',tab==='login');
+    document.getElementById('tabRegister').classList.toggle('active',tab==='register');
+    document.getElementById('loginBtn').textContent=tab==='login'?'ENTRAR ⚔️':'CRIAR CONTA ☄️';
+    document.getElementById('loginMsg').textContent='';
   }
 
-  async function doLogin() {
-    const nick = document.getElementById('loginNick').value.trim().toLowerCase();
-    const pass = document.getElementById('loginPass').value;
-    const msg = document.getElementById('loginMsg');
-    if (!nick||!pass){msg.className='login-msg err';msg.textContent='Preencha nick e senha!';return;}
-
-    if (currentLoginTab==='register') {
-      const res = await apiPost('/register',{nick,password:pass});
-      if (!res) return;
-      if (res.error){msg.className='login-msg err';msg.textContent=res.error;return;}
+  async function doLogin(){
+    const nick=document.getElementById('loginNick').value.trim().toLowerCase();
+    const pass=document.getElementById('loginPass').value;
+    const msg=document.getElementById('loginMsg');
+    if(!nick||!pass){msg.className='login-msg err';msg.textContent='Preencha nick e senha!';return;}
+    if(currentLoginTab==='register'){
+      const res=await apiPost('/register',{nick,password:pass});
+      if(!res) return;
+      if(res.error){msg.className='login-msg err';msg.textContent=res.error;return;}
       msg.className='login-msg ok';msg.textContent=res.message;
-      setTimeout(()=>switchTab('login'),1500);
-      return;
+      setTimeout(()=>switchTab('login'),1500);return;
     }
-
-    const res = await apiPost('/login',{nick,password:pass});
-    if (!res) return;
-    if (res.error){msg.className='login-msg err';msg.textContent=res.error;return;}
-
+    const res=await apiPost('/login',{nick,password:pass});
+    if(!res) return;
+    if(res.error){msg.className='login-msg err';msg.textContent=res.error;return;}
     SESSION={nick,password:pass};
-    playerLevel = res.level||1;
+    playerLevel=res.level||1;
+    serverBalance=res.balance||0;
+    localBalance=serverBalance;
+    currentCps=res.cps||0;
+    afkPending=res.afk_pending||0;
+    currentZone=res.zone||1;
+    currentMiners=res.miners||{};
+    totalClicked=res.total_clicked||0;
     document.getElementById('loginScreen').style.display='none';
     document.getElementById('gameScreen').style.display='block';
     document.getElementById('playerNickDisplay').textContent=nick.toUpperCase();
     updateStats(res);
-    updateInventoryDisplay(res.inventory||[]);
     updateQuestsDisplay(res.quests||[]);
+    updateZoneDisplay();
     fetchShop();
     fetchLeaderboard();
     loadZones();
     startChat();
-    if (res.afk_pending>0) showLevelUp(`+${res.afk_pending} coins AFK te esperando!`,'💰 COLETAR NA ABA MINA');
+    startIdleLoop();
+    if(res.afk_pending>0) showLevelUp(`+${Math.floor(res.afk_pending)} coins AFK!`,'⛏️ Colete na aba MINA');
   }
 
   document.addEventListener('keydown',e=>{
@@ -426,7 +430,7 @@
   function doLogout(){
     if(!confirm('Sair da conta?')) return;
     SESSION={nick:'',password:''};
-    if(chatInterval) clearInterval(chatInterval);
+    [chatInterval,idleInterval,saveInterval].forEach(i=>i&&clearInterval(i));
     document.getElementById('loginScreen').style.display='flex';
     document.getElementById('gameScreen').style.display='none';
     document.getElementById('loginNick').value='';
@@ -434,120 +438,125 @@
     document.getElementById('loginMsg').textContent='';
   }
 
-  function showTab(tab, btn) {
+  function showTab(tab,btn){
     document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.game-tab').forEach(t=>t.classList.remove('active'));
     document.getElementById('tab-'+tab).classList.add('active');
     if(btn) btn.classList.add('active');
     if(tab==='leaderboard') fetchLeaderboard();
-    if(tab==='mining') refreshAfkStatus();
+    if(tab==='miners') renderMiners();
     if(tab==='chat') scrollChat();
     if(tab==='quests') refreshQuests();
   }
 
-  // ── API ──
-  async function apiPost(path,body={}){
-    try{
-      const r=await fetch(SERVER+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-      return await r.json();
-    }catch(e){showBubble('error','ERRO DE CONEXAO',[['Dica','Verifique sua conexao']]);return null;}
-  }
-  async function apiGet(path){
-    try{const r=await fetch(SERVER+path);return await r.json();}catch(e){return null;}
-  }
-  function ab(extra={}){return{nick:SESSION.nick,password:SESSION.password,...extra};}
-
-  // ── Stats ──
-  function updateStats(data){
-    if(data.balance!==undefined) document.getElementById('statBalance').textContent=data.balance;
-    if(data.bank!==undefined) document.getElementById('statBank').textContent=data.bank;
-    const total=data.total??((data.balance||0)+(data.bank||0));
-    document.getElementById('statTotal').textContent=total;
-    if(data.xp!==undefined){
-      const xp=data.xp, lvl=data.level||1;
-      playerLevel=lvl;
-      document.getElementById('headerXp').textContent=xp;
-      document.getElementById('headerLevel').textContent=lvl;
-      document.getElementById('xpBar').style.width=(xp%100)+'%';
-      document.getElementById('xpBarLabel').textContent=`${xp%100}/100 XP — Nível ${lvl}`;
-      if(data.title) document.getElementById('playerTitle').textContent='· '+data.title;
-    }
+  function startIdleLoop(){
+    if(idleInterval) clearInterval(idleInterval);
+    idleInterval=setInterval(()=>{
+      if(currentCps>0){
+        localBalance+=currentCps;
+        afkPending=Math.min(afkPending+currentCps,afkCapacity);
+      }
+      updateLocalDisplay();
+    },1000);
+    if(saveInterval) clearInterval(saveInterval);
+    saveInterval=setInterval(syncBalance,15000);
   }
 
-  async function fetchBalance(){
-    const data=await apiPost('/balance',ab());
+  function updateLocalDisplay(){
+    document.getElementById('localBalanceDisplay').textContent=formatCoins(localBalance);
+    document.getElementById('cpsDisplay').textContent=currentCps.toFixed(2)+' coins/seg';
+    const pct=Math.min(afkPending/afkCapacity*100,100);
+    document.getElementById('afkBar').style.width=pct+'%';
+    document.getElementById('afkBarLabel').textContent=Math.floor(afkPending)+' / '+afkCapacity+' pendente';
+    document.getElementById('statBalance').textContent=formatCoins(localBalance);
+    const bank=parseFloat(document.getElementById('statBank').textContent.replace('K','000').replace('M','000000'))||0;
+    document.getElementById('statTotal').textContent=formatCoins(localBalance+bank);
+  }
+
+  function formatCoins(n){
+    n=Math.floor(n);
+    if(n>=1000000) return (n/1000000).toFixed(1)+'M';
+    if(n>=1000) return (n/1000).toFixed(1)+'K';
+    return n.toString();
+  }
+
+  async function syncBalance(){
+    if(!SESSION.nick) return;
+    const data=await apiPost('/mine/status',ab());
     if(!data||data.error) return;
-    updateStats(data);
+    if(data.balance>localBalance) localBalance=data.balance;
+    serverBalance=data.balance;
+    afkPending=data.afk_pending||0;
+    afkCapacity=data.capacity||2000;
+    currentCps=data.cps||0;
   }
 
-  // ── Commands ──
-  async function cmd(action){
-    const data=await apiPost('/'+action,ab());
-    if(!data) return;
-    handleResult(action,data);
-    if(!data.error){
-      updateStats(data);
-      if(data.leveled_up) showLevelUp(`⬆️ LEVEL ${data.level}`,data.title||'');
-      if(data.quest_rewards&&data.quest_rewards.length)
-        data.quest_rewards.forEach(q=>showLevelUp(`QUEST: ${q.quest}`,`+${q.reward} coins!`));
+  async function doClick(event){
+    const rock=document.getElementById('clickRock');
+    rock.style.transform='scale(0.85)';
+    setTimeout(()=>rock.style.transform='scale(1)',100);
+    spawnFloatCoin(event,'+'+clickPower);
+    localBalance+=clickPower;
+    totalClicked++;
+    document.getElementById('totalClickedDisplay').textContent=totalClicked;
+    updateLocalDisplay();
+    const data=await apiPost('/mine/click',ab());
+    if(!data||data.error) return;
+    if(data.balance>serverBalance) serverBalance=data.balance;
+    if(data.leveled_up){
+      playerLevel=data.level;
+      showLevelUp(`⬆️ LEVEL ${data.level}!`,getTitleClient(data.level));
+      updateZoneDisplay();
+    }
+    if(data.xp_gain) updateXpDisplay(data);
+    if(data.quest_rewards&&data.quest_rewards.length){
+      data.quest_rewards.forEach(q=>showLevelUp(`QUEST: ${q.quest}`,`+${q.reward} coins!`));
       refreshQuests();
     }
   }
 
-  async function cmdAmount(action,inputId){
-    const val=document.getElementById(inputId).value;
-    if(!val||val<=0){showBubble('error','VALOR INVALIDO',[['Info','Digite um valor maior que zero']]);return;}
-    const data=await apiPost('/'+action,ab({amount:parseInt(val)}));
-    if(!data) return;
-    handleResult(action,data);
-    if(!data.error){fetchBalance();refreshQuests();}
+  function spawnFloatCoin(event,text){
+    const el=document.createElement('div');
+    el.className='float-coin';
+    el.textContent=text;
+    el.style.left=(event.clientX-20)+'px';
+    el.style.top=(event.clientY-30)+'px';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),950);
   }
 
-  async function cmdTransfer(){
-    const target=document.getElementById('transferNick').value.trim().toLowerCase();
-    const val=document.getElementById('transferVal').value;
-    if(!target){showBubble('error','NICK INVALIDO',[['Info','Digite o nick do destinatario']]);return;}
-    if(!val||val<=0){showBubble('error','VALOR INVALIDO',[['Info','Digite um valor']]);return;}
-    const data=await apiPost('/transfer',ab({target,amount:parseInt(val)}));
-    if(!data) return;
-    handleResult('transfer',data);
-    if(!data.error) fetchBalance();
+  function updateZoneDisplay(){
+    const zoneEmojis={1:'🪨',2:'⚙️',3:'✨',4:'💎',5:'🚀'};
+    const zoneNames={1:'MINA DE CARVAO',2:'MINA DE FERRO',3:'MINA DE OURO',4:'MINA DE DIAMANTE',5:'MINA ESPACIAL'};
+    const zoneClicks={1:5,2:12,3:30,4:70,5:150};
+    document.getElementById('clickRock').textContent=zoneEmojis[currentZone]||'🪨';
+    document.getElementById('zoneName').textContent=(zoneEmojis[currentZone]||'🪨')+' '+(zoneNames[currentZone]||'MINA');
+    clickPower=zoneClicks[currentZone]||5;
+    document.getElementById('clickPowerDisplay').textContent='+'+clickPower;
+    document.getElementById('totalMinersDisplay').textContent=Object.values(currentMiners).reduce((a,b)=>a+b,0);
   }
 
-  async function cmdSlots(){
-    const val=document.getElementById('slotsVal').value;
-    if(!val||val<=0){showBubble('error','APOSTA INVALIDA',[['Info','Digite um valor']]);return;}
-    const data=await apiPost('/slots',ab({bet:parseInt(val)}));
+  async function collectAfk(){
+    const data=await apiPost('/mine/collect',ab());
     if(!data) return;
-    if(data.reels){
-      const em={cereja:'🍒',limao:'🍋',sino:'🔔',estrela:'⭐',diamante:'💎'};
-      document.getElementById('reelsDisplay').textContent=data.reels.map(r=>em[r]||r).join('  ');
-    }
-    handleResult('slots',data);
-    if(!data.error){updateStats(data);if(data.leveled_up)showLevelUp(`⬆️ LEVEL ${data.level}`,data.title||'');}
+    if(data.error){showBubble('error','NADA PARA COLETAR',[['Info',data.error]]);return;}
+    serverBalance=data.balance;
+    localBalance=Math.max(localBalance,serverBalance);
+    afkPending=0;
+    updateLocalDisplay();
+    showLevelUp(`+${Math.floor(data.collected)} coins!`,'⛏️ AFK coletado!');
   }
 
-  // ── Mineração AFK ──
   async function loadZones(){
     const data=await apiGet('/zones');
     if(!data) return;
     zonesData=data;
-    renderZones();
-    refreshAfkStatus();
+    renderMiners();
   }
 
-  async function refreshAfkStatus(){
-    const data=await apiPost('/mine/status',ab());
-    if(!data||data.error) return;
-    document.getElementById('afkPending').textContent=data.afk_pending+' coins';
-    document.getElementById('afkRate').textContent=data.rate_per_min+'/min';
-    document.getElementById('afkCapacity').textContent=data.capacity;
-    renderZones(data.miners);
-  }
-
-  function renderZones(currentMiners={}){
+  function renderMiners(){
     if(!zonesData) return;
-    const container=document.getElementById('zonesContainer');
+    const container=document.getElementById('minersContainer');
     const {zones,miners}=zonesData;
     container.innerHTML='';
     for(const [zid,zone] of Object.entries(zones)){
@@ -556,28 +565,26 @@
       const zoneMiners=miners[zid]||[];
       const card=document.createElement('div');
       card.className='zone-card'+(locked?' zone-locked':'');
+      const minersHTML=locked
+        ?`<div style="font-size:0.8rem;opacity:0.6;padding:8px;">Desbloqueie no Lv.${zone.req_level}</div>`
+        :zoneMiners.map(m=>{
+          const qty=currentMiners[m.id]||0;
+          return `<div class="miner-row">
+            <div class="miner-info">
+              <div class="miner-name">${m.name}</div>
+              <div class="miner-cps">+${m.cps} coins/seg · ${m.price} 💰</div>
+            </div>
+            <div class="miner-qty">x${qty}</div>
+            <button class="miner-buy-btn" onclick="buyMiner('${m.id}')">COMPRAR<br>${m.price}💰</button>
+          </div>`;
+        }).join('');
       card.innerHTML=`
-        <div class="zone-header" style="background:${locked?'#333':zone.color+'22'};border-bottom:3px solid var(--ink)">
-          <span style="font-size:1.3rem">${zone.emoji}</span>
+        <div class="zone-header" style="background:${locked?'#333':zone.color+'22'}">
+          <span style="font-size:1.2rem">${zone.emoji}</span>
           ${zone.name.toUpperCase()}
-          ${locked?`<span class="lock-badge">🔒 Lv.${zone.req_level}</span>`:'<span style="font-size:0.7rem;opacity:0.6;font-family:\'Noto Sans JP\';margin-left:auto">+${zone.base_rate} base/min</span>'}
+          ${locked?`<span class="lock-badge">🔒 Lv.${zone.req_level}</span>`:`<span style="margin-left:auto;font-size:0.7rem;opacity:0.6;font-family:'Noto Sans JP'">+${zone.click_base}/clique</span>`}
         </div>
-        <div class="zone-body">
-          ${locked
-            ? `<div style="font-size:0.8rem;opacity:0.6">Alcance o nível ${zone.req_level} para desbloquear esta zona.</div>`
-            : zoneMiners.map(m=>{
-                const qty=currentMiners[m.id]||0;
-                return `<div class="miner-card">
-                  <div class="miner-info">
-                    <div class="miner-name">${m.name}</div>
-                    <div class="miner-rate">+${m.rate} coins/min cada</div>
-                  </div>
-                  <div class="miner-qty">x${qty}</div>
-                  <button class="miner-buy" onclick="buyMiner('${m.id}')">COMPRAR<br>${m.price}💰</button>
-                </div>`;
-              }).join('')
-          }
-        </div>`;
+        <div class="zone-body">${minersHTML}</div>`;
       container.appendChild(card);
     }
   }
@@ -586,30 +593,88 @@
     const data=await apiPost('/mine/buy_miner',ab({miner_id:minerId}));
     if(!data) return;
     if(data.error){showBubble('error','BLOQUEADO',[['Motivo',data.error]]);return;}
-    showBubble('success','MINERADOR COMPRADO!',[
-      ['Nome',data.bought],
-      ['Qty','x'+data.qty],
-      ['Taxa','+'+data.rate+'/min'],
-      ['Saldo',data.balance]
-    ]);
-    fetchBalance();
-    refreshAfkStatus();
+    currentMiners=data.miners;
+    currentCps=data.total_cps;
+    serverBalance=data.balance;
+    localBalance=Math.max(localBalance,serverBalance);
+    document.getElementById('totalMinersDisplay').textContent=Object.values(currentMiners).reduce((a,b)=>a+b,0);
+    showLevelUp(`${data.bought} comprado!`,`+${data.cps} coins/seg`);
+    renderMiners();
+    updateLocalDisplay();
   }
 
-  async function collectAfk(){
-    const data=await apiPost('/mine/collect',ab());
+  function updateStats(data){
+    if(data.balance!==undefined){serverBalance=parseFloat(data.balance);localBalance=Math.max(localBalance,serverBalance);}
+    if(data.bank!==undefined) document.getElementById('statBank').textContent=formatCoins(parseFloat(data.bank));
+    updateLocalDisplay();
+    if(data.xp!==undefined) updateXpDisplay(data);
+  }
+
+  function updateXpDisplay(data){
+    const xp=data.xp||0,lvl=data.level||1;
+    playerLevel=lvl;
+    document.getElementById('headerXp').textContent=xp;
+    document.getElementById('headerLevel').textContent=lvl;
+    document.getElementById('xpBar').style.width=(xp%100)+'%';
+    document.getElementById('xpBarLabel').textContent=`${xp%100}/100 XP — Nível ${lvl}`;
+    if(data.title) document.getElementById('playerTitle').textContent='· '+data.title;
+  }
+
+  async function fetchBalance(){
+    const data=await apiPost('/balance',ab());
+    if(!data||data.error) return;
+    updateStats(data);
+    currentCps=data.cps||0;
+    afkPending=data.afk_pending||0;
+  }
+
+  async function cmd(action){
+    const data=await apiPost('/'+action,ab());
     if(!data) return;
-    if(data.error){showBubble('error','NADA PARA COLETAR',[['Info',data.error]]);return;}
-    showBubble('success','COLETADO!',[
-      ['Ganhou','+'+data.collected,'pos'],
-      ['Saldo',data.balance]
-    ]);
-    fetchBalance();
-    refreshAfkStatus();
-    showLevelUp(`+${data.collected} coins coletados!`,'⛏️');
+    handleResult(action,data);
+    if(!data.error){
+      updateStats(data);
+      if(data.leveled_up) showLevelUp(`⬆️ LEVEL ${data.level}!`,data.title||'');
+      if(data.quest_rewards&&data.quest_rewards.length){
+        data.quest_rewards.forEach(q=>showLevelUp(`QUEST: ${q.quest}`,`+${q.reward} coins!`));
+        refreshQuests();
+      }
+    }
   }
 
-  // ── Quests ──
+  async function cmdAmount(action,inputId){
+    const val=document.getElementById(inputId).value;
+    if(!val||val<=0){showBubble('error','VALOR INVALIDO',[['Info','Digite um valor maior que zero']]);return;}
+    const data=await apiPost('/'+action,ab({amount:parseFloat(val)}));
+    if(!data) return;
+    handleResult(action,data);
+    if(!data.error){fetchBalance();refreshQuests();}
+  }
+
+  async function cmdTransfer(){
+    const target=document.getElementById('transferNick').value.trim().toLowerCase();
+    const val=document.getElementById('transferVal').value;
+    if(!target){showBubble('error','NICK INVALIDO',[['Info','Digite o nick']]);return;}
+    if(!val||val<=0){showBubble('error','VALOR INVALIDO',[['Info','Digite um valor']]);return;}
+    const data=await apiPost('/transfer',ab({target,amount:parseFloat(val)}));
+    if(!data) return;
+    handleResult('transfer',data);
+    if(!data.error) fetchBalance();
+  }
+
+  async function cmdSlots(){
+    const val=document.getElementById('slotsVal').value;
+    if(!val||val<=0){showBubble('error','APOSTA INVALIDA',[['Info','Digite um valor']]);return;}
+    const data=await apiPost('/slots',ab({bet:parseFloat(val)}));
+    if(!data) return;
+    if(data.reels){
+      const em={cereja:'🍒',limao:'🍋',sino:'🔔',estrela:'⭐',diamante:'💎'};
+      document.getElementById('reelsDisplay').textContent=data.reels.map(r=>em[r]||r).join('  ');
+    }
+    handleResult('slots',data);
+    if(!data.error){updateStats(data);if(data.leveled_up) showLevelUp(`⬆️ LEVEL ${data.level}!`,data.title||'');}
+  }
+
   async function refreshQuests(){
     const data=await apiPost('/quests',ab());
     if(!data||data.error) return;
@@ -628,20 +693,6 @@
       </div>`).join('');
   }
 
-  // ── Inventory ──
-  function updateInventoryDisplay(inventory){
-    const grid=document.getElementById('inventoryGrid');
-    const EFFECTS={espada:'Trabalho +50 coins',picareta:'Mineração +80 coins',mochila:'Capacidade AFK +500',amuleto:'XP x1.5 em tudo'};
-    if(!inventory||!inventory.length){grid.innerHTML='<div class="inv-empty">Mochila vazia — compre itens na loja!</div>';return;}
-    grid.innerHTML=inventory.map(item=>`
-      <div class="inv-item">
-        <div class="inv-icon">${ICONS[item]||'📦'}</div>
-        <div class="inv-name">${item.toUpperCase()}</div>
-        <div class="inv-effect">✅ ${EFFECTS[item]||'Equipado'}</div>
-      </div>`).join('');
-  }
-
-  // ── Shop ──
   async function fetchShop(){
     const data=await apiGet('/shop');
     if(!data||!data.items) return;
@@ -661,17 +712,11 @@
     const data=await apiPost('/buy',ab({item}));
     if(!data) return;
     if(data.error){showBubble('error','BLOQUEADO',[['Motivo',data.error]]);return;}
-    showBubble('success','GOT IT!!',[
-      ['Comprado',data.bought],
-      ['Efeito',data.effect||''],
-      ['Saldo',data.balance]
-    ]);
+    showBubble('success','GOT IT!!',[['Comprado',data.bought],['Efeito',data.effect||''],['Saldo',formatCoins(data.balance)]]);
     fetchBalance();
-    const inv=await apiPost('/inventory',ab());
-    if(inv&&!inv.error) updateInventoryDisplay(Object.keys(inv.inventory));
+    fetchShop();
   }
 
-  // ── Leaderboard ──
   async function fetchLeaderboard(){
     const data=await apiGet('/leaderboard');
     if(!data||!data.leaderboard) return;
@@ -685,11 +730,10 @@
           <div class="lb-nick">${p.nick}</div>
           <div class="lb-title">${p.title} · Lv.${p.level}</div>
         </div>
-        <div class="lb-coins">${p.total} 💰</div>
+        <div class="lb-coins">${formatCoins(p.total)} 💰</div>
       </div>`).join('');
   }
 
-  // ── Chat ──
   function startChat(){fetchChatMessages();chatInterval=setInterval(fetchChatMessages,5000);}
 
   async function fetchChatMessages(){
@@ -716,12 +760,9 @@
     if(data&&data.success) fetchChatMessages();
   }
 
-  // ── Result ──
   function handleResult(action,data){
     if(data.error){showBubble('error','BLOQUEADO',[['Motivo',data.error]]);return;}
-    const sfx={work:'GRIND!!',daily:'BONUS!!',mine:'KANG!!',
-      slots:data.result==='JACKPOT!'?'JACKPOT!!':data.result==='ganhou!'?'WIN!!':'MISS..',
-      deposit:'SAVED!!',withdraw:'CASH!!',transfer:'SENT!!'};
+    const sfx={work:'GRIND!!',daily:'BONUS!!',slots:data.result==='JACKPOT!'?'JACKPOT!!':data.result==='ganhou!'?'WIN!!':'MISS..',deposit:'SAVED!!',withdraw:'CASH!!',transfer:'SENT!!'};
     const rows=[];
     if(data.earned!==undefined) rows.push(['Ganhou','+'+data.earned,'pos']);
     if(data.reward!==undefined) rows.push(['Recompensa','+'+data.reward,'pos']);
@@ -730,7 +771,7 @@
     if(data.withdrawn!==undefined) rows.push(['Sacado',data.withdrawn,'gold-c']);
     if(data.amount!==undefined) rows.push(['Transferido',data.amount,'gold-c']);
     if(data.xp_gain&&data.xp_gain>0) rows.push(['+XP','+'+data.xp_gain,'blue-c']);
-    if(data.balance!==undefined) rows.push(['Carteira',data.balance,'']);
+    if(data.balance!==undefined) rows.push(['Saldo',formatCoins(data.balance),'']);
     showBubble('success',sfx[action]||'OK!',rows);
   }
 
@@ -750,9 +791,26 @@
   function showLevelUp(line1,line2=''){
     const el=document.createElement('div');
     el.className='levelup-popup';
-    el.innerHTML=line1+(line2?`<br><span style="font-size:0.8rem">${line2}</span>`:'');
+    el.innerHTML=line1+(line2?`<br><span style="font-size:0.75rem">${line2}</span>`:'');
     document.body.appendChild(el);
     setTimeout(()=>el.remove(),2800);
+  }
+
+  async function apiPost(path,body={}){
+    try{
+      const r=await fetch(SERVER+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      return await r.json();
+    }catch(e){return null;}
+  }
+  async function apiGet(path){
+    try{const r=await fetch(SERVER+path);return await r.json();}catch(e){return null;}
+  }
+  function ab(extra={}){return{nick:SESSION.nick,password:SESSION.password,...extra};}
+  function getTitleClient(level){
+    const t=[['Novato',0],['Aventureiro',5],['Mercador',10],['Veterano',20],['Especialista',35],['Lendario',50],['Imortal',75],['Deus do EON',100]];
+    let title='Novato';
+    for(const[name,lvl] of t) if(level>=lvl) title=name;
+    return title;
   }
 </script>
 </body>
