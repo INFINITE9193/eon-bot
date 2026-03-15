@@ -482,4 +482,187 @@ def slots():
     player["balance"] -= bet
     if reels[0]==reels[1]==reels[2]:
         mult = 10 if reels[0]=="diamante" else 5
-        winni 
+        winnings = bet*mult; result = "JACKPOT!"
+    elif reels[0]==reels[1] or reels[1]==reels[2]:
+        winnings = bet*2; result = "ganhou!"
+    else:
+        winnings = 0; result = "perdeu"
+    player["balance"] += winnings
+    xp_gain, leveled = (add_xp(player,"slots_win") if winnings>0 else (0,False))
+    save_player(player)
+    return jsonify({"reels":reels,"result":result,"bet":bet,"winnings":winnings,
+                    "balance":player["balance"],"xp_gain":xp_gain,
+                    "level":player["level"],"leveled_up":leveled})
+
+# ── Zonas e Mineração AFK ──────────────────────────────────
+
+@app.route("/zones", methods=["GET"])
+def zones():
+    return jsonify({"zones":ZONES,"miners":MINERS})
+
+@app.route("/mine/status", methods=["POST"])
+def mine_status():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    afk_coins, elapsed = calc_afk(player)
+    capacity = 2000 + (500 if "mochila" in player.get("inventory",[]) else 0)
+    total_rate = 0
+    miners = player.get("miners",{})
+    for miner_id, qty in miners.items():
+        for zone_ms in MINERS.values():
+            for m in zone_ms:
+                if m["id"] == miner_id:
+                    total_rate += m["rate"] * qty
+    return jsonify({
+        "zone": player.get("zone",1),
+        "zone_info": ZONES.get(player.get("zone",1)),
+        "miners": miners,
+        "afk_pending": afk_coins,
+        "rate_per_min": total_rate,
+        "capacity": capacity,
+        "elapsed_seconds": elapsed,
+    })
+
+@app.route("/mine/collect", methods=["POST"])
+def mine_collect():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    earned, elapsed = calc_afk(player)
+    if earned <= 0:
+        return jsonify({"error":"Nada para coletar ainda. Compre mineradores!"}), 400
+    player["balance"] += earned
+    player["last_collect"] = now_iso()
+    save_player(player)
+    return jsonify({"nick":player["nick"],"collected":earned,
+                    "balance":player["balance"],"elapsed_seconds":elapsed})
+
+@app.route("/mine/buy_miner", methods=["POST"])
+def buy_miner():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    miner_id = data.get("miner_id","")
+    miner_data = None
+    for zone_ms in MINERS.values():
+        for m in zone_ms:
+            if m["id"] == miner_id:
+                miner_data = m; break
+
+    if not miner_data: return jsonify({"error":"Minerador nao encontrado."}), 404
+    zone_req = miner_data["zone"]
+    zone_info = ZONES[zone_req]
+    if player.get("level",1) < zone_info["req_level"]:
+        return jsonify({"error":f"Precisa Lv.{zone_info['req_level']} para comprar este minerador."}), 400
+    if player["balance"] < miner_data["price"]:
+        return jsonify({"error":f"Precisa de {miner_data['price']} coins."}), 400
+
+    # Coleta AFK antes de mudar mineradores
+    earned, _ = calc_afk(player)
+    if earned > 0:
+        player["balance"] += earned
+        player["last_collect"] = now_iso()
+
+    player["balance"] -= miner_data["price"]
+    miners = player.get("miners",{})
+    miners[miner_id] = miners.get(miner_id,0) + 1
+    player["miners"] = miners
+    if not player.get("last_collect"):
+        player["last_collect"] = now_iso()
+    save_player(player)
+    return jsonify({
+        "nick":player["nick"],"bought":miner_data["name"],
+        "price":miner_data["price"],"balance":player["balance"],
+        "miners":miners,"rate":miner_data["rate"],
+        "qty":miners[miner_id]
+    })
+
+@app.route("/mine/unlock_zone", methods=["POST"])
+def unlock_zone():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    zone_id = int(data.get("zone",0))
+    if zone_id not in ZONES: return jsonify({"error":"Zona invalida."}), 400
+    zone = ZONES[zone_id]
+    if player.get("level",1) < zone["req_level"]:
+        return jsonify({"error":f"Precisa Lv.{zone['req_level']} para desbloquear esta zona."}), 400
+    player["zone"] = max(player.get("zone",1), zone_id)
+    save_player(player)
+    return jsonify({"nick":player["nick"],"zone":player["zone"],"zone_info":zone})
+
+# ── Quests ────────────────────────────────────────────────
+
+@app.route("/quests", methods=["POST"])
+def quests():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    return jsonify({"nick":player["nick"],"quests":get_quest_progress(player)})
+
+@app.route("/profile", methods=["POST"])
+def profile():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    afk_coins, _ = calc_afk(player)
+    return jsonify({
+        "nick":player["nick"],"level":player.get("level",1),
+        "xp":player.get("xp",0),"title":get_title(player.get("level",1)),
+        "balance":player["balance"],"bank":player["bank"],
+        "inventory":player.get("inventory",[]),
+        "quests":get_quest_progress(player),
+        "zone":player.get("zone",1),"miners":player.get("miners",{}),
+        "afk_pending":afk_coins,
+    })
+
+@app.route("/leaderboard", methods=["GET"])
+def leaderboard():
+    players = load_all_players()
+    ranking = sorted(players, key=lambda x:x["balance"]+x["bank"], reverse=True)
+    for p in ranking:
+        p["total"] = p["balance"]+p["bank"]
+        p["title"] = get_title(p.get("level",1))
+    return jsonify({"leaderboard":ranking[:10]})
+
+# ── Chat ──────────────────────────────────────────────────
+
+@app.route("/chat/send", methods=["POST"])
+def chat_send():
+    data = request.json or {}
+    player, err, code = auth(data)
+    if err: return err, code
+    message = data.get("message","").strip()
+    if not message: return jsonify({"error":"Mensagem vazia."}), 400
+    if len(message)>200: return jsonify({"error":"Mensagem muito longa."}), 400
+    conn = get_conn()
+    if conn:
+        cur = conn.cursor()
+        cur.execute("INSERT INTO chat (nick,message) VALUES (%s,%s)", (player["nick"],message))
+        cur.execute(f"DELETE FROM chat WHERE id NOT IN (SELECT id FROM chat ORDER BY id DESC LIMIT {MAX_CHAT})")
+        conn.commit(); cur.close(); conn.close()
+    else:
+        db = load_json()
+        msgs = db.get("__chat__",[])
+        msgs.append({"nick":player["nick"],"message":message,"time":now_iso()})
+        db["__chat__"] = msgs[-MAX_CHAT:]
+        save_json(db)
+    return jsonify({"success":True})
+
+@app.route("/chat/messages", methods=["GET"])
+def chat_messages():
+    conn = get_conn()
+    if conn:
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        cur.execute("SELECT nick,message,created_at FROM chat ORDER BY id DESC LIMIT 50")
+        rows = cur.fetchall(); cur.close(); conn.close()
+        msgs = [{"nick":r["nick"],"message":r["message"],"time":str(r["created_at"])} for r in reversed(rows)]
+    else:
+        db = load_json(); msgs = db.get("__chat__",[])
+    return jsonify({"messages":msgs})
+
+if __name__ == "__main__":
+    init_db()
+    port = int(os.environ.get("PORT",5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
